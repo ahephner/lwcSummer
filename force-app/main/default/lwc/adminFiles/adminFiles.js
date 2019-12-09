@@ -14,6 +14,7 @@ export default class AdminFiles extends LightningElement {
         @api recordId; 
         @track assetId;
         @track links = [];
+        @track final = [];
         @track columns = columns;
         connectedCallback(){
             this.assetId = this.recordId; 
@@ -26,7 +27,21 @@ export default class AdminFiles extends LightningElement {
                 if(data){
                     this.links = data;
                     this.error = undefined;
-                    console.log(this.links)
+                    //this.links.forEach(x => console.log(x))
+                    console.log(data);
+                    
+                    this.links.forEach((x)=>{
+                        var pair={};
+                        //var el = x.Title;//'<a href='+ x.Id+' target="_blank">'+ x.Title+'</a>'
+                        pair.Id = x.Id; 
+                        pair.Title = x.Title; 
+                        pair.FileType = x.FileType;
+                        pair.link = 'https://advancedturf--summer19.lightning.force.com/lightning/r/Admin_File__c/'+ x.Id +'/view'
+                        pair.CreatedDate = x.CreatedDate;
+                        this.final.push(pair);
+                        return pair
+                      })
+                      console.log(this.final)
                 }else if(error){
                     this.error = error; 
                     this.links = undefined;
