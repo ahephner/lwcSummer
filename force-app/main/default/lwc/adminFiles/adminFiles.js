@@ -1,10 +1,20 @@
 /* eslint-disable no-console */
 import { LightningElement, track, api, wire } from 'lwc';
 import getFiles from '@salesforce/apex/assetAdminController.getFiles'
+
+
+const columns = [
+    { label: 'Title', fieldName: 'Title' },
+    { label: 'File Type', fieldName: 'FileType' },
+    { label: 'Created Date', fieldName: 'CreatedDate' },
+    
+
+];
 export default class AdminFiles extends LightningElement {
         @api recordId; 
         @track assetId;
-        @track links = []
+        @track links = [];
+        @track columns = columns;
         connectedCallback(){
             this.assetId = this.recordId; 
             //console.log(this.assetId + ' assetId');

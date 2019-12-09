@@ -3,11 +3,11 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
-            "c/assetTrack": [
-                "assetTrack/assetTrack.js"
-            ],
             "c/adminFiles": [
                 "adminFiles/adminFiles.js"
+            ],
+            "c/assetTrack": [
+                "assetTrack/assetTrack.js"
             ]
         }
     },

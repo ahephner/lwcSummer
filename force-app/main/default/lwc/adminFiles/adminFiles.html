@@ -1,5 +1,10 @@
 <template>
     <lightning-card>
-        test this out now {assetId}
+        <h6> Admin Files</h6>
+        <lightning-datatable
+        key-field="id"
+        data={links}
+        columns={columns}>
+</lightning-datatable>
     </lightning-card>
 </template>
