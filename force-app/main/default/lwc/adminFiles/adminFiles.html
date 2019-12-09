@@ -4,9 +4,14 @@
             <div class="slds-grid">
                     <lightning-icon 
                     icon-name="doctype:pack" alternative-text="Doc image"  ></lightning-icon>
-                    <p class='slds-p-left_x-small'> Admin Files</p>
+                    <p class='slds-p-left_x-small'> Admin File</p>
                     <span class='slds-col slds-size_2-of-4'></span>
-                    <lightning-button class='slds-col slds-size_1-of-4 slds-p-left_large' label="Upload Files" ></lightning-button>
+                    <lightning-file-upload class='slds-col slds-size_1-of-4 slds-p-left_large'  
+                    name='fileUploader'
+                    accept={acceptFormat}
+                    record-id={adminId}
+                    onuploadfinished={handleUploadFinish}
+                    multiple></lightning-file-upload>
                 </div>
         <div>
             <span class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">Titles</span>

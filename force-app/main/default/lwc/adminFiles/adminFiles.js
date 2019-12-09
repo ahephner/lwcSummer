@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { LightningElement, track, api, wire } from 'lwc';
 import getFiles from '@salesforce/apex/assetAdminController.getFiles'
-
+import adminID from '@salesforce/apex/assetAdminController.adminID'
 
 const columns = [
     { label: 'Title', fieldName: 'Title' },
@@ -15,6 +15,7 @@ export default class AdminFiles extends LightningElement {
         @track assetId;
         @track links = [];
         @track final = [];
+        @track adminId; 
         @track columns = columns;
         connectedCallback(){
             this.assetId = this.recordId; 
@@ -28,7 +29,7 @@ export default class AdminFiles extends LightningElement {
                     this.links = data;
                     this.error = undefined;
                     //this.links.forEach(x => console.log(x))
-                    console.log(data);
+                   //console.log(data);
                     
                     this.links.forEach((x)=>{
                         var pair={};
@@ -41,26 +42,34 @@ export default class AdminFiles extends LightningElement {
                         this.final.push(pair);
                         return pair
                       })
-                      console.log(this.final)
+                      //console.log(this.final)
                 }else if(error){
                     this.error = error; 
                     this.links = undefined;
                 }
             }
+
+        @wire(adminID, {assetId: '$assetId'})
+            wiredAID({error,data}){
+                if(data){
+                    this.adminId = data;
+                    this.error = undefined;
+                    console.log('This Admin ID '+this.adminId)
+                }else if(error){
+                    this.error = error; 
+                    this.adminID = undefined;
+                }
+            }
+            
+
+            //whitelist for file types accepted for upload
+            get acceptFormat(){
+                return ['.pdf', '.jpg', '.jpeg', '.csv', '.xlsx']
+            } 
+            handleUploadFinish(e){
+                const upload = e.detail.files;
+                // eslint-disable-next-line no-alert
+                alert('# of files uploaded: ' + upload); 
+            }
 }
 
-// var after = [];
-// var x = [{name: 'test', 
-//          id: '1243'},
-//          {name: 'test2',
-//           id: '567'}]
-
-//   x.forEach(i =>{  
-//                  var pair = {};
-//                   var el =  '<a href='+ i.id+' target="_blank">'+ i.name+'</a>'
-//                   pair['name'] = el; 
-//                   after.push(pair);
-//                   return pair;
-//                   })
-// console.log(after)
-// console.log(x)
