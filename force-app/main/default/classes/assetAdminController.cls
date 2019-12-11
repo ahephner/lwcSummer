@@ -6,7 +6,7 @@ public with sharing class assetAdminController {
         //with returnFiles.add(); 
         //list<ContentDocument> returnFiles = new list<ContentDocument>();
         List<String> cd = new List<String>(); 
-        id x = [select id from Admin_File__c where ATS_Asset__c = :assetId].id;
+        id x = [select id from Admin_File__c where ATS_Asset__c = :assetId limit 1].id;
         //link ids
         list<ContentDocumentLink> ids = [select ContentDocumentId from ContentDocumentLink 
                                         where LinkedEntityId = :x];
@@ -22,7 +22,8 @@ public with sharing class assetAdminController {
     }
     @AuraEnabled(cacheable=True)
     public static id adminID(string assetId){
-        id x = [select id from Admin_File__c where ATS_Asset__c = :assetId].id;
+        id x = [select id from Admin_File__c where ATS_Asset__c = :assetId limit 1].id;
         return x; 
     }
 }
+
