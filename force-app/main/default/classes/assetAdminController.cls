@@ -20,4 +20,9 @@ public with sharing class assetAdminController {
         return files; 
 
     }
+    @AuraEnabled(cacheable=True)
+    public static id adminID(string assetId){
+        id x = [select id from Admin_File__c where ATS_Asset__c = :assetId].id;
+        return x; 
+    }
 }

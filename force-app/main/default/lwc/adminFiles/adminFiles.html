@@ -4,30 +4,49 @@
             <div class="slds-grid">
                     <lightning-icon 
                     icon-name="doctype:pack" alternative-text="Doc image"  ></lightning-icon>
-                    <p class='slds-p-left_x-small'> Admin Files</p>
-                    <span class='slds-col slds-size_2-of-4'></span>
-                    <lightning-button class='slds-col slds-size_1-of-4 slds-p-left_large' label="Upload Files" ></lightning-button>
+                    <p class='slds-p-left_x-small'> Admin File</p>
+                   <span class='slds-size_1-of-4'></span>
+                   <div>
+                        <lightning-file-upload  
+                        class='slds-p-bottom-medium'
+                        name='fileUploader'
+                        accept={acceptFormat}
+                        record-id={adminId}
+                        onuploadfinished={handleUploadFinish}
+                        multiple></lightning-file-upload>
+                    </div>
                 </div>
-        <div>
-            <span class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">Titles</span>
-            <span class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">Types</span>
-            <span class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">Created Date</span>
-        </div>
-    
-                <template for:each={final} for:item='x'>
-               <lightning-layout key={x.Id}> 
-                    <a href='{x.link}'  >
-                        <lightning-layout-item>
-                                <p class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">{x.Title}</p>
-                            </lightning-layout-item>
-                        </a>
-                    <lightning-layout-item>
-                        <p class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">{x.FileType}</p>
-                    </lightning-layout-item>   
-                    <lightning-layout-item>
-                        <p class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center"><lightning-formatted-date-time value='{x.CreatedDate}'></lightning-formatted-date-time></p>
-                    </lightning-layout-item>
-                </lightning-layout>
-            </template>
+                <hr>
+                <!--This is what gives it the abilty to scroll -->
+                <div class="slds-scrollable_y" style="height:6rem;width:34rem">
+                    <div class="slds-grid">
+                       <span class="slds-size_1-of-3 slds-p-top_xx-small slds-p-left_medium slds-text-align_center">Titles</span>
+                       <span class="slds-size_1-of-3 slds-p-top_xx-small slds-p-left_medium slds-text-align_center">Types</span>
+                       <span class="slds-size_1-of-3 slds-p-top_xx-small slds-p-left_medium slds-text-align_center">Created Date</span>
+                    </div>
+                    <template for:each={final} for:item='x'>
+                       <lightning-layout key={x.Id}>
+                          <span class="slds-size_1-of-3">
+                             <a href='{x.link}'>
+                                <lightning-layout-item>
+                                   <p class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">{x.Title}</p>
+                                </lightning-layout-item>
+                             </a>
+                          </span>
+                          <span class="slds-size_1-of-3">
+                             <lightning-layout-item>
+                                <p class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">{x.FileType}</p>
+                             </lightning-layout-item>
+                          </span>
+                          <span class="slds-size_1-of-3">
+                             <lightning-layout-item>
+                                <p class="slds-p-top_xx-small slds-p-left_medium slds-text-align_center">
+                                   <lightning-formatted-date-time value='{x.CreatedDate}'></lightning-formatted-date-time>
+                                </p>
+                             </lightning-layout-item>
+                          </span>
+                       </lightning-layout>
+                    </template>
+                 </div>    
     </lightning-card>
 </template>
