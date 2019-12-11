@@ -2,6 +2,7 @@
 import { LightningElement, track, api, wire } from 'lwc';
 import getFiles from '@salesforce/apex/assetAdminController.getFiles'
 import adminID from '@salesforce/apex/assetAdminController.adminID'
+import {ShowToastEvent} from 'lightning/platformShowToastEvent';
 
 const columns = [
     { label: 'Title', fieldName: 'Title' },
@@ -67,9 +68,21 @@ export default class AdminFiles extends LightningElement {
                 return ['.pdf', '.jpg', '.jpeg', '.csv', '.xlsx']
             } 
             handleUploadFinish(e){
-                const upload = e.detail.files;
-                // eslint-disable-next-line no-alert
-                alert('# of files uploaded: ' + upload); 
+                let strFileNames = '';
+                // Get the list of uploaded files
+                const uploadedFiles = e.detail.files;
+        
+                for(let i = 0; i < uploadedFiles.length; i++) {
+                    strFileNames += uploadedFiles[i].name + ', ';
+                }
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Success!!',
+                        message: strFileNames + ' Files uploaded Successfully!!!',
+                        variant: 'success',
+                    }),
+                );
+
             }
 }
 
