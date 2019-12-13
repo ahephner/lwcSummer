@@ -34,7 +34,6 @@ export default class AdminFiles extends LightningElement {
                     
                     this.links.forEach((x)=>{
                         var pair={};
-                        //var el = x.Title;//'<a href='+ x.Id+' target="_blank">'+ x.Title+'</a>'
                         pair.Id = x.Id; 
                         pair.Title = x.Title; 
                         pair.FileType = x.FileType;
@@ -78,11 +77,13 @@ export default class AdminFiles extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Success!!',
-                        message: strFileNames + ' Files uploaded Successfully!!!',
+                        message: strFileNames + ' Files uploaded Successfully! Please refresh page',
                         variant: 'success',
                     }),
                 );
 
             }
 }
+
+
 
