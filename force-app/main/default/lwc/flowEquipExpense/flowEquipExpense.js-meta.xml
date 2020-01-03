@@ -6,4 +6,14 @@
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen" category="some random category">
+            <property name="recordId" type="String" />
+            <property name="expAmount" type="Integer" />
+            <property name="expNote" type="String" />
+            <property name="expType" type="String" />
+            <property name="expDate" type="Date" />
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>

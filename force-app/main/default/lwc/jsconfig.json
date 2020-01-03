@@ -11,6 +11,9 @@
             ],
             "c/flowEquipExpense": [
                 "flowEquipExpense/flowEquipExpense.js"
+            ],
+            "c/flowExample": [
+                "flowExample/flowExample.js"
             ]
         }
     },
