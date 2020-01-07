@@ -1,15 +1,6 @@
 <template>
-    <lightning-card title="New Expense: Equipment">
-        <div class="slds-grid slds-m-left_small">
-            <div class="slds-col slds-size_4-of-12">
-                <lightning-input type="text" label="ATS Asset" value={recordId}></lightning-input>
-            </div>
-             <span class="slds-col slds-size_1-of-12"></span>
-            <div class="slds-col slds-size_4-of-12 ">
-                <lightning-input type="date" label="Expense Date"
-                value={expDate} onchange={newDate}></lightning-input>
-            </div>
-        </div>
+    <template if:true={maint}> 
+    <lightning-card title="New Expense">
         <div class="slds-grid slds-m-left_small">
             <div class="slds-col slds-size_4-of-12">
                 <lightning-combobox  
@@ -21,12 +12,18 @@
             </div>
              <span class="slds-col slds-size_1-of-12"></span>
             <div class="slds-col slds-size_4-of-12 ">
+                <lightning-input type="date" label="Expense Date"
+                value={expDate} onchange={newDate}></lightning-input>
+            </div>
+        </div>
+        <div class="slds-grid slds-m-left_small">
+            <div class="slds-col slds-size_9-of-12 ">
                 <lightning-input type="number" label="Amount"
                 formatter="currency" value={expAmount} onchange={newAmount}></lightning-input>
             </div>
         </div>
         <div class='slds-grid slds-m-left_small'>
-            <lightning-textarea class="slds-size_4-of-12" 
+            <lightning-textarea class="slds-size_9-of-12" 
             label="Note"
             value={note}
             onchange={newNote}></lightning-textarea>
@@ -38,4 +35,36 @@
             label='Next' onclick={handleNext}></lightning-button>
         </div>    
     </lightning-card>
+    </template>
+   <template if:true={fuel}>
+        <lightning-card title="New Fuel Record"> 
+                <div class="slds-grid slds-m-left_small">
+                    <div class="slds-col slds-size_4-of-12">
+                        <lightning-input type="date" label="Entry Date"></lightning-input>
+                    </div>
+                    <span class="slds-col slds-size_1-of-12"></span> 
+                </div>
+                <div class="slds-grid slds-m-left_small">
+                    <div class="slds-col slds-size_4-of-12">
+                        <lightning-input type="decimal" label="Gallons"></lightning-input>
+                    </div>
+                    <span class="slds-col slds-size_1-of-12"></span> 
+                    <div class="slds-col slds-size_4-of-12">
+                        <lightning-input type="number" 
+                         formatter="currency" step="0.01" label="Fuel Cost"></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-grid slds-m-left_small">
+                    <div class="slds-col slds-size_4-of-12">
+                        <lightning-input type="decimal" label="Def Gallons"></lightning-input>
+                    </div>
+                    <span class="slds-col slds-size_1-of-12"></span> 
+                    <div class="slds-col slds-size_4-of-12">
+                        <lightning-input type="number" 
+                         formatter="currency" step="0.01" label="Def Cost"></lightning-input>
+                    </div>
+                </div>
+               
+       </lightning-card>
+   </template>
 </template>

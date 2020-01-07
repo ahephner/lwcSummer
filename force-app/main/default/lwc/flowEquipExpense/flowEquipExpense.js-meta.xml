@@ -14,6 +14,12 @@
             <property name="expNote" type="String" />
             <property name="expType" type="String" />
             <property name="expDate" type="Date" />
+            <property name="maint" type="Boolean" /> 
+            <property name="fuel" type="Boolean" /> 
+            <property name="gallons" type="Integer" />
+            <property name="fuelCost" type="Integer" />
+            <property name="defGallon" type="Integer" />
+            <property name="defCost" type="Integer" /> 
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

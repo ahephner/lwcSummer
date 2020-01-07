@@ -11,11 +11,27 @@ export default class FlowEquipExpense extends LightningElement {
     @api recordId;
     @api expAmount;
     @track note
+    @api maint
+    @api fuel; 
+    @api gallons
+    @api fuelCost
+    @api defGallon
+    @api defCost
+    
+    connectedCallback(){
+        console.log(this.maint + ' maint')
+    }
     //next page
     handleNext(){
         const nextNav = new FlowNavigationNextEvent();
         this.dispatchEvent(nextNav);
     }
+    // @api get maint(){
+    //   // console.log('this.maint -> '+this.maint + ' this._maint -> ' + this._maint);
+        
+    //     return this._maint 
+    // }
+
 @api get expNoteVal(){
     return this.expNote
 }
@@ -24,17 +40,19 @@ export default class FlowEquipExpense extends LightningElement {
      
     this.expNote = val; 
 }
+
     get equipType(){
         return [
             {label: 'PM', value: 'PM'},
             {label: 'Tires', value: 'Tires'},
             {label: 'Repair', value: 'Repair'}
         ]
+        
     }
 
     newType(e){
         this.expType = e.detail.value; 
-
+        
     }
 
     newAmount(c){
@@ -61,5 +79,31 @@ export default class FlowEquipExpense extends LightningElement {
              this.dispatchEvent(attributeChange); 
         },400); 
       
+    }
+
+//Fuel Info
+    newGallon(g){
+        this.gallons = g.detail.value;
+        const galChange = new FlowAttributeChangeEvent('gallons', this.gallons);
+        
+        this.dispatchEvent(galChange)
+    }
+    fuelCost(g){
+        this.fuelCost = g.detail.value;
+        const fuelChange = new FlowAttributeChangeEvent('fuelCost', this.fuelCost);
+        
+        this.dispatchEvent(fuelChange)
+    }
+    defGallon(g){
+        this.defGallon = g.detail.value;
+        const defGalChange = new FlowAttributeChangeEvent('defGallon', this.defGallon);
+        
+        this.dispatchEvent(defGalChange)
+    }
+    defCost(g){
+        this.defCost = g.detail.value;
+        const defCostChange = new FlowAttributeChangeEvent('defCost', this.defCost);
+        
+        this.dispatchEvent(defCostChange)
     }
 }
