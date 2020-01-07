@@ -40,28 +40,33 @@
         <lightning-card title="New Fuel Record"> 
                 <div class="slds-grid slds-m-left_small">
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-input type="date" label="Entry Date"></lightning-input>
+                            <lightning-input type="date" label="Expense Date"
+                            value={expDate} onchange={newDate}></lightning-input>
                     </div>
                     <span class="slds-col slds-size_1-of-12"></span> 
                 </div>
                 <div class="slds-grid slds-m-left_small">
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-input type="decimal" label="Gallons"></lightning-input>
+                        <lightning-input type="decimal" label="Gallons"
+                         value={gallons} onchange={newGallon}></lightning-input>
                     </div>
                     <span class="slds-col slds-size_1-of-12"></span> 
                     <div class="slds-col slds-size_4-of-12">
                         <lightning-input type="number" 
-                         formatter="currency" step="0.01" label="Fuel Cost"></lightning-input>
+                         formatter="currency" step="0.01" label="Fuel Cost"
+                         value={fuelCost} onchange={newFuelCost}></lightning-input>
                     </div>
                 </div>
                 <div class="slds-grid slds-m-left_small">
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-input type="decimal" label="Def Gallons"></lightning-input>
+                        <lightning-input type="decimal" label="Def Gallons"
+                         value={defGallon} onchange={newDefGallon}></lightning-input>
                     </div>
                     <span class="slds-col slds-size_1-of-12"></span> 
                     <div class="slds-col slds-size_4-of-12">
                         <lightning-input type="number" 
-                         formatter="currency" step="0.01" label="Def Cost"></lightning-input>
+                         formatter="currency" step="0.01" label="Def Cost"
+                         value={defCost} onchange={newDefCost}></lightning-input>
                     </div>
                 </div>
                

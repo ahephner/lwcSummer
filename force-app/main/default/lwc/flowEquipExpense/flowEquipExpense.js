@@ -84,23 +84,25 @@ export default class FlowEquipExpense extends LightningElement {
 //Fuel Info
     newGallon(g){
         this.gallons = g.detail.value;
+        console.log(this.gallons);
         const galChange = new FlowAttributeChangeEvent('gallons', this.gallons);
-        
         this.dispatchEvent(galChange)
     }
-    fuelCost(g){
+    newFuelCost(g){
         this.fuelCost = g.detail.value;
+        console.log(this.fuelCost);
+        
         const fuelChange = new FlowAttributeChangeEvent('fuelCost', this.fuelCost);
         
         this.dispatchEvent(fuelChange)
     }
-    defGallon(g){
+    newDefGallon(g){
         this.defGallon = g.detail.value;
         const defGalChange = new FlowAttributeChangeEvent('defGallon', this.defGallon);
         
         this.dispatchEvent(defGalChange)
     }
-    defCost(g){
+    newDefCost(g){
         this.defCost = g.detail.value;
         const defCostChange = new FlowAttributeChangeEvent('defCost', this.defCost);
         
