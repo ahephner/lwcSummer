@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="flowEquipExpense">
+    <apiVersion>47.0</apiVersion>
+    <isExposed>true</isExposed>
+
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen" category="some random category">
+            <property name="recordId" type="String" />
+            <property name="expAmount" type="Integer" />
+            <property name="expNote" type="String" />
+            <property name="expType" type="String" />
+            <property name="expDate" type="Date" />
+            <property name="maint" type="Boolean" /> 
+            <property name="fuel" type="Boolean" /> 
+            <property name="gallons" type="Integer" />
+            <property name="fuelCost" type="Integer" />
+            <property name="defGallon" type="Integer" />
+            <property name="defCost" type="Integer" /> 
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
