@@ -1,8 +1,14 @@
 <template>
     <lightning-card>
-        
-            <h5>Progress to 1 next Maintenance {miles} - {nextService}</h5> 
-            <lightning-progress-bar value={} size="large"></lightning-progress-bar>
+        <div class="slds-m-left_small">
+            <h5>{left} Remaining miles till maintenance </h5>
+        </div> 
+        <template if:true={pastDue}>
+            <div class="slds-m-left_small">
+                <h2 class="warn"><em>Vehicale Past Due Maintenance!!!!!</em></h2>
+            </div>
+        </template>
+            <lightning-progress-bar value={build} size="large" variant="circular"></lightning-progress-bar>
         
     </lightning-card>    
 </template>
