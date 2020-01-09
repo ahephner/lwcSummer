@@ -14,6 +14,9 @@
             ],
             "c/flowExample": [
                 "flowExample/flowExample.js"
+            ],
+            "c/accMap": [
+                "accMap/accMap.js"
             ]
         }
     },
