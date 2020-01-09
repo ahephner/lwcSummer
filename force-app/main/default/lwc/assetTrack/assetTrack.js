@@ -1,27 +1,48 @@
 /* eslint-disable no-console */
 import { LightningElement, track, wire, api } from 'lwc';
-import {getRecord} from 'lightning/uiRecordApi' 
-//import NEXT_SERVICE from '@salesforce/schema/ATS_Asset__c.Next_Service__c'
-//import MILEAGE from '@salesforce/schema/ATS_Asset__c.Mileage_YTD__c'
+//import {getRecord, getFieldValue} from 'lightning/uiRecordApi'; 
+import getAsset from '@salesforce/apex/atsAsset.getAsset';
 
-//const Fields = [NEXT_SERVICE, MILEAGE];
+//const fields = [NEXT_SERVICE, MILEAGE];
 export default class AssetTrack extends LightningElement {
     @api recordId; 
     @track build;
     @track miles;
     @track service
-    @wire(getRecord, {recordID: '$recordId', fields:
-                                                    ['ATS_Assets__c.Next_Service__c ', 'ATS_Asset__c.Mileage_YTD__c']})
-        assetLoad({error, data}){
+    @track left; 
+    @track pastDue;
+     id = this.recordId;
+    // connectedCallback(){
+    //     console.log(this.recordId + ' id')
+    //     this.id = this.recordId;
+
+    // }
+    @wire(getAsset, {recordId: '$recordId'})
+        wiredMethod({error, data}){
             if(error){
-                console.log('error : ', error.body.errorCode, error.body.message)
-            } else if(data){
-                console.log(data);
+                console.log(this.recordId);
+                this.error = error; 
+                this.build = undefined;
+                console.log(this.error);
                 
-                    this.build = data.fields.Next_Service__c.value;
-                    this.miles = data.fields.Mileage_YTD__c.value; 
+            }else if(data){
+               // console.log('data');
+                this.service = data.Next_Service__c;
+                this.miles = data.Latest_Mileage__c;
+                this.error = undefined;
+                //console.log(data);
+                this.proBar(this.miles, this.service);
+                //warnning message
+               this.pastDue = ((this.service-this.miles < 0)? true:false);
+               console.log(this.pastDue);
+               
+                this.away(this.service, this.miles)
             }
-        } 
-    
-        
+        }
+        proBar(x, y){
+            this.build = (x/y)*100; 
+            return this.build; 
+        }
+        away= (a,b)=>{ this.left =  a - b;} 
+
 }
