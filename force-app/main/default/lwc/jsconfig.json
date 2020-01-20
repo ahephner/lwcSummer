@@ -3,6 +3,9 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
+            "c/accMap": [
+                "accMap/accMap.js"
+            ],
             "c/adminFiles": [
                 "adminFiles/adminFiles.js"
             ],
@@ -15,8 +18,8 @@
             "c/flowExample": [
                 "flowExample/flowExample.js"
             ],
-            "c/accMap": [
-                "accMap/accMap.js"
+            "c/newAsset": [
+                "newAsset/newAsset.js"
             ]
         }
     },

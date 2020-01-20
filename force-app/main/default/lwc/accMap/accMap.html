@@ -1,16 +1,16 @@
 <template>
     <div class="slds-m-around_medium">
-        <h1 class="slds-text-heading_small">Complex Example</h1>
-        <p class="slds-text-body_regular">All available attributes on map are used here. Apart from markers the center and zoom level are set manually. Also the footer and coordinates list view are always shown.</p>
-        <lightning-button onclick={noList}>Close List</lightning-button>
+        <h1 class="slds-text-heading_small">{userId}</h1>
+        <lightning-button variant='brand' label='close side view'
+         onclick={noList}></lightning-button>
     </div>
     <!-- the map component -->
-    <lightning-map
+  <!--  <lightning-map
         map-markers = {mapMarkers}
         center = {center}
         zoom-level = {zoomLevel}
         markers-title = {markersTitle}
         show-footer = {showFooter}
         list-view = {listView}>
-    </lightning-map>
+    </lightning-map> --> 
 </template>
