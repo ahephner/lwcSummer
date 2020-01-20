@@ -1,6 +1,6 @@
 <template >
     
-    <lightning-card title="New Asset">
+    <lightning-card title={assetStage}>
         <div class="slds-grid slds-m-left_small">
              <div class="slds-col slds-size_4-of-12">
                  <lightning-input type='string' label='col1'></lightning-input>
@@ -9,6 +9,15 @@
              <div class="slds-col slds-size_4-of-12">
                  {last}
              </div>
+             <template if:true={hold}>
+                 <lightning-record-edit-form
+                    object-api-name={objectApiName}
+                    record-id={recordId}
+                 >
+                 <lightning-input-field
+                    field-name="Long_Name__c"></lightning-input-field>
+                </lightning-record-edit-form>
+             </template>
         </div>
     </lightning-card>
     

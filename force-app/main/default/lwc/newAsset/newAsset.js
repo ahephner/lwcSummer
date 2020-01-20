@@ -9,23 +9,38 @@ export default class NewAsset extends LightningElement {
     @api recordId; 
     @api objectApiName;
     @track last; 
-    @track asset; 
+    @track curStage; 
+    @track hold; 
     @wire(getRecord, {recordId: '$recordId', fields}) 
-    wiredMethod({data, error}){
-            if(data){
-                console.log(data);
-                console.log(data.fields);
-               // this.asset = data; 
-               // console.log(this.asset.fields.Long_Name__c.value);
-                this.last = getFieldValue(data, LNAME_FIELD) 
-                 
-                //console.log(this.asset, 1);
-                
-            }else if(error){
-                console.log(error);
-                
-            }
+        asset
+    
+    get assetStage(){
+        console.log(1,getFieldValue(this.asset.data, Stage) );
+        this.curStage = getFieldValue(this.asset.data, Stage); 
+        this.whatStage(this.curStage); 
+        return getFieldValue(this.asset.data, Stage); 
+    }
+    whatStage(x){
+        if(x === 'Holding'){
+            this.hold = true; 
+            
         }
+    }
+    // wiredMethod({data, error}){
+    //         if(data){
+    //             console.log(data);
+    //             console.log(data.fields);
+    //            // this.asset = data; 
+    //            // console.log(this.asset.fields.Long_Name__c.value);
+    //             this.last = getFieldValue(data, LNAME_FIELD) 
+                 
+    //             //console.log(this.asset, 1);
+                
+    //         }else if(error){
+    //             console.log(error);
+                
+    //         }
+    //     }
         
 
 }
