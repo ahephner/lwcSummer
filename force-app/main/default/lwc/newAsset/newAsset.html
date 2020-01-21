@@ -9,7 +9,7 @@
              <div class="slds-col slds-size_4-of-12">
                  {last}
              </div>
-             <template if:true={hold}>
+             <template if:true={Holding}>
                  <lightning-record-edit-form
                     object-api-name={objectApiName}
                     record-id={recordId}
@@ -17,6 +17,9 @@
                  <lightning-input-field
                     field-name="Long_Name__c"></lightning-input-field>
                 </lightning-record-edit-form>
+             </template>
+             <template if:true={next}>
+                 hey yalll
              </template>
         </div>
     </lightning-card>

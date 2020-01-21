@@ -9,8 +9,15 @@ export default class NewAsset extends LightningElement {
     @api recordId; 
     @api objectApiName;
     @track last; 
+    //stages 
     @track curStage; 
-    @track hold; 
+    @track Purchased = false;
+    @track Holding = false;
+    @track Details = true; 
+    @track Registered = false;
+    @track Installed = false;
+    @track Active = false;
+    @track next
     @wire(getRecord, {recordId: '$recordId', fields}) 
         asset
     
@@ -20,10 +27,23 @@ export default class NewAsset extends LightningElement {
         this.whatStage(this.curStage); 
         return getFieldValue(this.asset.data, Stage); 
     }
-    whatStage(x){
-        if(x === 'Holding'){
-            this.hold = true; 
-            
+    whatStage(stageName){
+       let stage = ['Purchased', 'Holding', 'Details', 'Registered', 'Installed', 'Active']
+       console.log('stages ' +stage);
+        console.log('stageName '+ stageName);
+        
+        let index = stage.findIndex(cya => cya === stageName )
+        console.log(typeof index, ' index');
+        
+        if( stage[index] >= 0 || index !=null || index !== undefined){
+       // stage.forEach(not => not + ' = false')
+          //this.stageNew = 'this.' stage[index] += ' = true'
+            console.log(stage[index]);
+            this.next = stage[index] + true 
+    }else{
+        console.log(index + ' out of bounds index');
+        
+    }
         }
     }
     // wiredMethod({data, error}){
@@ -43,4 +63,4 @@ export default class NewAsset extends LightningElement {
     //     }
         
 
-}
+//}
