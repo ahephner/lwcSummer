@@ -40,6 +40,7 @@ export default class NewAsset extends LightningElement {
            this.Details = false;
            this.Registered = false;
            this.Installed = false; 
+           
        }else if (stageName === 'Details'){
            this.Purchased = false;
            this.Holding = false;
