@@ -3,8 +3,8 @@ import { LightningElement,track, api, wire} from 'lwc';
 //import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import Stage from '@salesforce/schema/ATS_Asset__c.Asset_Stage__c'
-import LNAME_FIELD from '@salesforce/schema/ATS_Asset__c.Long_Name__c'
-const fields=[Stage, LNAME_FIELD]; 
+//import LNAME_FIELD from '@salesforce/schema/ATS_Asset__c.Long_Name__c'
+const fields=[Stage, 'ATS_Asset__c.Long_Name__c', 'ATS_Asset__c.VIN_Num__c']; 
 export default class NewAsset extends LightningElement {
     @api recordId; 
     @api objectApiName;
@@ -16,7 +16,7 @@ export default class NewAsset extends LightningElement {
     @track Details = true; 
     @track Registered = false;
     @track Installed = false;
-    @track Active = false;
+    
     @track next
     @wire(getRecord, {recordId: '$recordId', fields}) 
         asset
@@ -28,22 +28,37 @@ export default class NewAsset extends LightningElement {
         return getFieldValue(this.asset.data, Stage); 
     }
     whatStage(stageName){
-       let stage = ['Purchased', 'Holding', 'Details', 'Registered', 'Installed', 'Active']
-       console.log('stages ' +stage);
-        console.log('stageName '+ stageName);
-        
-        let index = stage.findIndex(cya => cya === stageName )
-        console.log(typeof index, ' index');
-        
-        if( stage[index] >= 0 || index !=null || index !== undefined){
-       // stage.forEach(not => not + ' = false')
-          //this.stageNew = 'this.' stage[index] += ' = true'
-            console.log(stage[index]);
-            this.next = stage[index] + true 
-    }else{
-        console.log(index + ' out of bounds index');
-        
-    }
+       if(stageName === 'Purchased'){
+           this.Purchased = true;
+           this.Holding = false;
+           this.Details = false;
+           this.Registered = false;
+           this.Installed = false; 
+       }else if(stageName === 'Holding'){
+           this.Purchased = false;
+           this.Holding = true;
+           this.Details = false;
+           this.Registered = false;
+           this.Installed = false; 
+       }else if (stageName === 'Details'){
+           this.Purchased = false;
+           this.Holding = false;
+           this.Details = true;
+           this.Registered = false;
+           this.Installed = false; 
+       }else if(stageName === 'Registered'){
+           this.Purchased = false;
+           this.Holding = false;
+           this.Details = false;
+           this.Registered = true;
+           this.Installed = false; 
+       }else if(stageName === 'Installed'){
+           this.Purchased = false;
+           this.Holding = false;
+           this.Details = false;
+           this.Registered = false;
+           this.Installed = true; 
+       }
         }
     }
     // wiredMethod({data, error}){

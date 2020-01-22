@@ -1,26 +1,41 @@
 <template >
-    
     <lightning-card title={assetStage}>
         <div class="slds-grid slds-m-left_small">
-             <div class="slds-col slds-size_4-of-12">
-                 <lightning-input type='string' label='col1'></lightning-input>
-             </div>
-             <span class="slds-col slds-size_1-of-12"></span>
-             <div class="slds-col slds-size_4-of-12">
-                 {last}
-             </div>
+                <lightning-record-edit-form
+                object-api-name={objectApiName}
+                record-id={recordId}>
+                
+                <template if:true={Purchased}>
+                    
+                        <div class="slds-col slds-size_4-of-12">
+                            <lightning-input-field field-name="Asset_Type__c"></lightning-input-field>
+                            <lightning-input-field field-name="ATS_Location__c"></lightning-input-field>
+                        </div>
+                        <span class="slds-col slds-size_1-of-12"></span>
+                        <div class="slds-col slds-size_4-of-12">
+                            <lightning-input-field field-name="Purchase_Date__c"></lightning-input-field>
+                            <lightning-input-field field-name="Purchase_Price__c"></lightning-input-field>
+                        </div>
+                </template>
+             
              <template if:true={Holding}>
-                 <lightning-record-edit-form
-                    object-api-name={objectApiName}
-                    record-id={recordId}
-                 >
                  <lightning-input-field
                     field-name="Long_Name__c"></lightning-input-field>
-                </lightning-record-edit-form>
+                    <lightning-input-field
+                    field-name="VIN_Num__c"></lightning-input-field>
              </template>
-             <template if:true={next}>
-                 hey yalll
+
+             <template if:true={Details}>
+                 details
              </template>
+             <template if:true={Registered}>
+                Registered
+            </template>
+
+            <template if:true={Installed}>
+                Installed
+            </template>
+        </lightning-record-edit-form>
         </div>
     </lightning-card>
     
