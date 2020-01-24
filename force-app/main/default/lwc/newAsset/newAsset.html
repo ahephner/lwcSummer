@@ -3,7 +3,7 @@
         
                 
                 <!-- <template if:true={Purchased}> -->
-                    <div class="slds-grid slds-m-left_medium">
+                    <!-- <div class="slds-grid slds-m-left_medium"> -->
                             <template if:true={Purchased}>
                             <div class="slds-col slds-size_4-of-12">   
                                 <lightning-record-edit-form
@@ -27,23 +27,31 @@
                 <!-- </template> -->
              
              <template if:true={Holding}>
-                    <div class="slds-col slds-size_4-of-12">
                         <lightning-record-edit-form
                         object-api-name={objectApiName}
-                        record-id={recordId}>
-                            <lightning-input-field field-name="Refurb_Date__c"></lightning-input-field>
-                            <lightning-input-field field-name="ATS_Location__c"></lightning-input-field> 
-                           
-                        </lightning-record-edit-form>
-                    </div>
+                        record-id={recordId}
+                        onsuccess={success}>
+                        <lightning-messages>
+                        </lightning-messages>
+
+                        <div class="slds-grid slds-m-left_medium">
+                            <div class="slds-col slds-size_4-of-12">
+                                <lightning-input-field field-name="Refurb_Date__c"></lightning-input-field>
+                                <lightning-input-field field-name="ATS_Location__c"></lightning-input-field>                        
+                            </div>
                     <span class="slds-col slds-size_1-of-12"></span>
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-record-edit-form
-                        object-api-name={objectApiName}
-                        record-id={recordId}>
                             <lightning-input-field field-name="Description__c"></lightning-input-field>
-                        </lightning-record-edit-form>
+                            <lightning-button
+                            variant="brand"
+                            type="submit"
+                            name="save"
+                            label="Save"
+                        ></lightning-button>
+                        
                     </div>
+                    </div>
+                </lightning-record-edit-form>
                 </template>
 
              <template if:true={Details}>
@@ -110,7 +118,8 @@
                             </lightning-record-edit-form>
                         </div>
             </template>
-        </div>
+            
+        <!-- </div> -->
     </lightning-card>
     
 </template>

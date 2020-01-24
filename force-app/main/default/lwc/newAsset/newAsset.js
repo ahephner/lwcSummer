@@ -3,6 +3,7 @@ import { LightningElement,track, api, wire} from 'lwc';
 //import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import Stage from '@salesforce/schema/ATS_Asset__c.Asset_Stage__c'
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 //import LNAME_FIELD from '@salesforce/schema/ATS_Asset__c.Long_Name__c'
 const fields=[Stage, 'ATS_Asset__c.Long_Name__c', 'ATS_Asset__c.VIN_Num__c']; 
 export default class NewAsset extends LightningElement {
@@ -61,6 +62,16 @@ export default class NewAsset extends LightningElement {
            this.Installed = true; 
        }
         }
+        success(){
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Success',
+                    message:'Questions Recorded',
+                    variant: 'success'
+                })
+            )
+        }
+        
     }
     // wiredMethod({data, error}){
     //         if(data){
