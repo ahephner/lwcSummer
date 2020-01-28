@@ -20,6 +20,9 @@
             ],
             "c/newAsset": [
                 "newAsset/newAsset.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
             ]
         }
     },

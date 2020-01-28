@@ -8,7 +8,7 @@ import BillingCity from '@salesforce/schema/Account.BillingCity';
 import BillingState from '@salesforce/schema/Account.BillingState';
 import BillingPostalCode from '@salesforce/schema/Account.BillingPostalCode';
 import BillingStreet from '@salesforce/schema/Account.BillingStreet';
-import { getFieldValue } from 'lightning/uiRecordApi';
+//import { getFieldValue } from 'lightning/uiRecordApi';
 const fields = [BillingCity, BillingState, BillingPostalCode, BillingStreet]
 export default class AccMap extends LightningElement {
     @track listView = 'visible';
@@ -57,22 +57,23 @@ export default class AccMap extends LightningElement {
              this.data = undefined;
          }else if(data){
              this.error = undefined;
-            data.forEach(x => console.log(x.BillingStreet)
-            )             
+            // data.forEach(x => console.log(x.BillingStreet)
+            // ) 
+                        
              this.test = [{
                 location: {
-                    Street: getFieldValue(data, BillingStreet),
-                    City:  getFieldValue(data, BillingCity),
-                    PostalCode:  getFieldValue(data, BillingPostalCode),
-                    State:  getFieldValue(data, BillingState),
+                    Street: data[0].BillingStreet,
+                    City:  data[0].BillingCity,
+                    PostalCode: data[0].BillingPostalCode,
+                    State:  data[0].BillingState,
                     Country: 'USA',
                 },
                 
                 icon: 'utility:salesforce1',
-                title: data.Name,
+                title: data[0].Name,
                 description: 'description',
             },
-        ];console.log('mapmarkers '+ this.mapMarkers);
+        ];this.mapMarkers.forEach(i => console.log(i))
         console.log(this.test);
         
     
