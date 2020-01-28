@@ -15,22 +15,9 @@ export default class AccMap extends LightningElement {
     @track mapMarkers; 
     @track center 
     @track test
+    @track error; 
     userId = Id; 
-    mapMarkers = [{
-            location: {
-                Street: '12955 Ford Dr',
-                City: 'Fishers',
-                PostalCode: '46038',
-                State: 'IN',
-                Country: 'USA',
-            },
-
-            icon: 'utility:salesforce1',
-            title: 'ATS Home',
-            description: 'description',
-        },
-        
-    ];
+    mapMarkers = [];
 
     center = {
         location: {
@@ -39,7 +26,7 @@ export default class AccMap extends LightningElement {
     };
 
     zoomLevel = 4;
-    markersTitle = 'Salesforce locations in United States';
+    markersTitle = 'accounts';
     showFooter = true;
 
 
@@ -51,38 +38,25 @@ export default class AccMap extends LightningElement {
     @wire(getMyAccounts, {userId: '$userId', fields})
      wiredMethod({error, data}){
          if(error){
-             this.error = error
-             console.log(this.error);
-             
-             this.data = undefined;
+             this.error = error; 
+             console.log(this.error)
          }else if(data){
-             this.error = undefined;
-            // data.forEach(x => console.log(x.BillingStreet)
-            // ) 
-                        
-             this.test = [{
-                location: {
-                    Street: data[0].BillingStreet,
-                    City:  data[0].BillingCity,
-                    PostalCode: data[0].BillingPostalCode,
-                    State:  data[0].BillingState,
-                    Country: 'USA',
-                },
-                
-                icon: 'utility:salesforce1',
-                title: data[0].Name,
-                description: 'description',
-            },
-        ];this.mapMarkers.forEach(i => console.log(i))
-        console.log(this.test);
-        
-    
-        this.center = {
-            location: {
-                City: 'Fishers',
-            },
-        };
-             
+            data.forEach(item =>{
+                this.mapMarkers = [...this.mapMarkers,
+                {
+                    location: {
+                        Street: item.BillingStreet, 
+                        City: item.BillingCity,
+                        State: item.BillingState,
+                        Zip: item.BillingPostalCode,
+                        Country: 'USA'
+                    }, 
+                    icon: 'custom:custom26', 
+                    title: item.Name,
+                }]
+            });
+            console.log(this.mapMarkers)
+            this.error= undefined;
          }
      }
 }
