@@ -1,9 +1,15 @@
 <template >
     <lightning-card title={assetStage}>
+            <lightning-progress-indicator current-step={stage} type="path" variant="base">
+                <template for:each={steps} for:item="step">
+                    <lightning-progress-step label={step.label} value={step.value} key={step.label}></lightning-progress-step>
+                </template>
+            </lightning-progress-indicator>
             <lightning-record-edit-form
             object-api-name={objectApiName}
             record-id={recordId}
-            onsuccess={success}>
+            onsuccess={success}
+           >
             <lightning-messages>
             </lightning-messages>
             <div class="slds-grid slds-wrap slds-m-left_medium">
@@ -33,47 +39,49 @@
 
              <template if:true={Details}>
                     <div class="slds-col slds-size_4-of-12">                            
-                        <lightning-input-field field-name="DOT_Inspection_Date__c"></lightning-input-field>
-                        <lightning-input-field field-name="Gross_Vehicle_Weight__c"></lightning-input-field>
-                        <lightning-input-field field-name="Combined_Gross_Weight__c"></lightning-input-field>  
+                        <lightning-input-field required field-name="DOT_Inspection_Date__c"></lightning-input-field>
+                        <lightning-input-field required field-name="Gross_Vehicle_Weight__c"></lightning-input-field>
+                        <lightning-input-field required field-name="Combined_Gross_Weight__c"></lightning-input-field>
+                        <lightning-input-field required field-name="Serial_Number__c"></lightning-input-field>  
                     </div>
                         <span class="slds-col slds-size_1-of-12"></span>
                     <div class="slds-col slds-size_4-of-12"> 
                         <lightning-input-field field-name="Tires_Axles_and_Combined_Weight__c"></lightning-input-field> 
-                        <lightning-input-field field-name="Front_TIre_Szie__c"></lightning-input-field>
-                        <lightning-input-field field-name="Back_Tire_Size__c"></lightning-input-field>      
+                        <lightning-input-field required field-name="Front_Tire_Size3__c"></lightning-input-field>
+                        <lightning-input-field required field-name="Back_Tire_Size3__c"></lightning-input-field>      
                     </div>
              </template>
 
              <template if:true={Registered}>
                 <div class="slds-col slds-size_4-of-12">
-                    <lightning-input-field field-name="License_Plate__c"></lightning-input-field>
-                    <!-- <lightning-input-field field-name="Gross_Vehicle_Weight__c"></lightning-input-field>
-                    <lightning-input-field field-name="Combined_Gross_Weight__c"></lightning-input-field>   -->
+                    <lightning-input-field required field-name="License_Plate__c"></lightning-input-field>
+                    <lightning-input-field required field-name="Registration__c"></lightning-input-field>
+                    <lightning-input-field field-name="DOT_Decal__c"></lightning-input-field>
                 </div>
                         <span class="slds-col slds-size_1-of-12"></span>
                 <div class="slds-col slds-size_4-of-12">
-                    <lightning-input-field field-name="IFTA__c"></lightning-input-field>
-                    <!-- <lightning-input-field field-name="Front_TIre_Szie__c"></lightning-input-field>
-                    <lightning-input-field field-name="Back_Tire_Size__c"></lightning-input-field>   -->
+                     <lightning-input-field field-name="Possession_Date__c"></lightning-input-field>
+                     <lightning-input-field field-name="EZ_Pass__c"></lightning-input-field>
+                     <lightning-input-field field-name="PrePass_Num__c"></lightning-input-field>
+                     <lightning-input-field field-name="DOT_Decal__c"></lightning-input-field>
+                     
                </div>
             </template>
 
             <template if:true={Installed}>
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-input-field field-name="PrePass_Num__c"></lightning-input-field>
-                        <lightning-input-field field-name="EZ_Pass__c"></lightning-input-field>
-                        <lightning-input-field field-name="K_Tag__c"></lightning-input-field>                
+                        <lightning-input-field field-name="Fleetmatics__c"></lightning-input-field>
+                        <lightning-input-field field-name="ELD_Mounting_Bracket__c"></lightning-input-field>
+                        <lightning-input-field  required field-name="Insurance_Card_Scan_Copy_Attached__c"></lightning-input-field>
                     </div>
                         <span class="slds-col slds-size_1-of-12"></span>
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-input-field field-name="Serial_Number__c"></lightning-input-field>
-                        <!-- <lightning-input-field field-name="Front_TIre_Szie__c"></lightning-input-field>
-                        <lightning-input-field field-name="Back_Tire_Size__c"></lightning-input-field>   -->
+                        <lightning-input-field field-name="Additional_Equipment_Request__c"></lightning-input-field>                
                     </div>
             </template>
             <span class="slds-col slds-size_8-of-12"></span>
             <div class="slds-col slds-m-left_large slds-size_2-of-12">
+                <!-- <lightning-button label="Back" onclick={retreat} variant="primary"></lightning-button> -->
                 <lightning-button
                 variant="brand"
                 type="submit"
