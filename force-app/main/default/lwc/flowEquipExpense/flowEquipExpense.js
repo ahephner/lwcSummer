@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { LightningElement,track,api } from 'lwc';
-import { FlowNavigationNextEvent, FlowAttributeChangeEvent} from 'lightning/flowSupport';
+import { FlowNavigationNextEvent, FlowNavigationBackEvent, FlowAttributeChangeEvent} from 'lightning/flowSupport';
 //import { FlowNavigationNextEvent} from 'lightning/flowSupport';
 
 export default class FlowEquipExpense extends LightningElement {
@@ -25,6 +25,10 @@ export default class FlowEquipExpense extends LightningElement {
     handleNext(){
         const nextNav = new FlowNavigationNextEvent();
         this.dispatchEvent(nextNav);
+    }
+    handleBack(){
+        const backNav = new FlowNavigationBackEvent();
+        this.dispatchEvent(backNav); 
     }
     // @api get maint(){
     //   // console.log('this.maint -> '+this.maint + ' this._maint -> ' + this._maint);
