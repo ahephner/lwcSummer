@@ -3,7 +3,8 @@
     <lightning-card title="New Expense">
         <div class="slds-grid slds-m-left_small">
             <div class="slds-col slds-size_4-of-12">
-                <lightning-combobox  
+                <lightning-combobox
+                required  
                 label="Expense Type"
                 placeholder="Select Type"
                 value={expType}
@@ -12,14 +13,14 @@
             </div>
              <span class="slds-col slds-size_1-of-12"></span>
             <div class="slds-col slds-size_4-of-12 ">
-                <lightning-input type="date" label="Expense Date"
+                <lightning-input  type="date" label="Expense Date"
                 value={expDate} onchange={newDate}></lightning-input>
             </div>
         </div>
         <div class="slds-grid slds-m-left_small">
             <div class="slds-col slds-size_9-of-12 ">
                 <lightning-input type="number" label="Amount"
-                formatter="currency" value={expAmount} onchange={newAmount}></lightning-input>
+                formatter="currency" required value={expAmount} onchange={newAmount}></lightning-input>
             </div>
         </div>
         <div class='slds-grid slds-m-left_small'>
@@ -29,14 +30,15 @@
             onchange={newNote}></lightning-textarea>
         </div>
         <div class="slds-grid">
-            <span class="slds-col slds-size_2-of-3"></span> 
-            <div class='slds-col slds-size_1-of-3'>
-                <lightning-button 
-                label='Back' variant="destructive" onclick={handleBack}></lightning-button>
-                <lightning-button 
-                class="slds-m-left_small"
-                label='Next' variant="brand" onclick={handleNext}></lightning-button>
-            </div>
+                <span class="slds-col slds-size_2-of-4"></span> 
+                <lightning-button-group class='slds-col slds-size_1-of-4 slds-m-left_xx-large'>
+                    <lightning-button
+                    class="slds-m-right_xx-small" 
+                    label='back' variant="destructive" onclick={handleBack}></lightning-button>
+                    <lightning-button 
+                    class="slds-m-right_x-small"
+                    label='next' variant="brand" onclick={handleNext}></lightning-button>
+                </lightning-button-group>
         </div>    
     </lightning-card>
     </template>
@@ -44,26 +46,26 @@
         <lightning-card title="New Fuel Record"> 
                 <div class="slds-grid slds-m-left_small">
                     <div class="slds-col slds-size_4-of-12">
-                            <lightning-input type="date" label="Expense Date"
+                            <lightning-input required type="date" label="Expense Date"
                             value={expDate} onchange={newDate}></lightning-input>
                     </div>
                     <span class="slds-col slds-size_1-of-12"></span> 
                 </div>
                 <div class="slds-grid slds-m-left_small">
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-input type="decimal" label="Gallons"
+                        <lightning-input required type="decimal" label="Gallons"
                          value={gallons} onchange={newGallon}></lightning-input>
                     </div>
                     <span class="slds-col slds-size_1-of-12"></span> 
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-input type="number" 
+                        <lightning-input type="number" required
                          formatter="currency" step="0.01" label="Fuel Cost"
                          value={fuelCost} onchange={newFuelCost}></lightning-input>
                     </div>
                 </div>
                 <div class="slds-grid slds-m-left_small">
                     <div class="slds-col slds-size_4-of-12">
-                        <lightning-input type="decimal" label="Def Gallons"
+                        <lightning-input  type="decimal" label="Def Gallons"
                          value={defGallon} onchange={newDefGallon}></lightning-input>
                     </div>
                     <span class="slds-col slds-size_1-of-12"></span> 
