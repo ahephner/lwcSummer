@@ -30,6 +30,20 @@ export default class FlowEquipExpense extends LightningElement {
         const backNav = new FlowNavigationBackEvent();
         this.dispatchEvent(backNav); 
     }
+    @api validate(){
+        if(this.maint === true && this.expAmount !== undefined && this.expType !== undefined){ 
+            console.log(this.maint, this.fuel, this.expAmount, this.expType);
+            
+            return {isValid: true}
+        }else if(this.fuel === true && this.fuelCost !== undefined && this.gallons !== undefined && this.expDate !== undefined){
+            return {isValid: true}
+        }
+        return{
+            isValid: false,
+            errorMessage:'You must enter required fields'
+        }
+    
+    }
     // @api get maint(){
     //   // console.log('this.maint -> '+this.maint + ' this._maint -> ' + this._maint);
         
