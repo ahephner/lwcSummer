@@ -5,7 +5,7 @@ import getGoal from '@salesforce/apex/managerGoal.getGoal';
 export default class ManagerGoal extends LightningElement {
     userId = Id;
     @track error;
-    @track goal; 
+    @track goal = 0; 
     @wire(getGoal, {userId: '$userId'})
         wiredMethod({error,data}){
             if(error){

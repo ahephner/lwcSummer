@@ -1,5 +1,12 @@
 <template>
     <lightning-card>
-        <p>User Id: {goal}</p>
+        <div class="slds-m-left_large">
+        <h3><b>Your Management Goal this month</b></h3>
+        <div class='number'> 
+            <p><lightning-formatted-number value={goal} 
+                format-style="currency" currency-code="USD">
+                </lightning-formatted-number></p>
+        </div>
+        </div>
     </lightning-card>
 </template>
