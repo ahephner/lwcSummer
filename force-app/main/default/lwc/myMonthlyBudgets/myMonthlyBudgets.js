@@ -3,10 +3,11 @@ import { LightningElement, track, wire } from 'lwc';
 import Id from '@salesforce/user/Id';
 import getMonthlyGoals from '@salesforce/apex/managerGoal.getMonthlyGoals'
 
+//without type on #cols nothing is 
 const columns = [
-    {label: 'Y', fieldName: 'Month_Name__c'},
-    {label: 'Manager Goal', fieldName: 'Total_Budget_Amount__c', type:'currency'}, 
-    {label: 'Actuals', fieldName: 'Progress_Amount__c', type:'currency'},
+    {label: 'Month', fieldName: 'Month_Name__c', cellAttributes: { alignment: 'center' }},
+    {label: 'Manager Goal', fieldName: 'Total_Budget_Amount__c', type:'currency', cellAttributes: { alignment: 'center' }}, 
+    {label: 'Actuals*', fieldName: 'Progress_Amount__c', type:'currency', cellAttributes: { alignment: 'center' }},
 ]; 
 export default class MyMonthlyBudgets extends LightningElement {
     @track error

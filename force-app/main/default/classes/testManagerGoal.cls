@@ -39,4 +39,27 @@ private class testManagerGoal {
         system.assertNotEquals(null, x); 
         Test.stopTest();
     }
+    @isTest
+    static void testRepGoals(){
+        User u1 = [SELECT Id FROM User WHERE Lastname like 'Test%']; 
+       date t =  date.today();
+        sales_rep__c sr = new sales_rep__c(recordtypeid = '01241000001MDnDAAW', 
+                                           name='Test', 
+                                           Sales_Rep_Num__c='1',
+                                          Salesforce_User__c = u1.id,
+                                          Active_Monthly_Budget__c= 123);
+        insert sr; 
+        
+        sales_goal__c sg = new sales_goal__c(name = 'test goal',
+                                            Budget_Type__c = 'Monthly Sales',
+                                            Sales_Rep__c = sr.Id,
+                                            Date__c= t); 
+        insert sg; 
+        test.startTest();
+        list<sales_goal__c> x = managerGoal.getMonthlyGoals(u1.id);
+        
+        system.assertNotEquals(null, x);
+        test.stopTest(); 
+        
+    }
 }
