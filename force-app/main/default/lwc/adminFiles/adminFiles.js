@@ -37,7 +37,9 @@ export default class AdminFiles extends LightningElement {
                         pair.Id = x.Id; 
                         pair.Title = x.Title; 
                         pair.FileType = x.FileType;
-                        pair.link = 'https://advancedturf--summer19.lightning.force.com/lightning/r/Admin_File__c/'+ x.Id +'/view'
+                        //this is for sandbox need to change the route for production
+                        //pair.link = 'https://advancedturf--summer19.lightning.force.com/lightning/r/Admin_File__c/'+ x.Id +'/view'
+                        pair.link = 'https://advancedturf.lightning.force.com/lightning/r/Admin_File__c/'+ x.Id +'/view'
                         pair.CreatedDate = x.CreatedDate;
                         this.final.push(pair);
                         return pair

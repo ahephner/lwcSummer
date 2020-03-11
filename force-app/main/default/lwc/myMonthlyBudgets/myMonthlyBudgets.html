@@ -1,0 +1,20 @@
+<template>
+    <lightning-card>
+        <h1 class="slds-text-heading_large">{title}</h1>
+        <div class="slds-scrollable" style="height:25%;width:100%">
+            <lightning-datatable
+            key-field="Id"
+            columns={columns}
+            data={data}
+            hide-checkbox-column>
+            </lightning-datatable>
+        </div>
+        <div>
+            <i>*Actuals are for Product Sales only and are approximations and uploaded once. View reports on this page for more info </i><br>
+            <i>**Currently Sports Turf Projects are not accounted for. Contact  your manager to see if they want you to forecast those numbers</i>
+        </div>
+        <div>
+            <a href={link}>View Report</a>
+        </div>
+    </lightning-card>
+</template>

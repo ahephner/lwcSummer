@@ -18,6 +18,12 @@
             "c/flowExample": [
                 "flowExample/flowExample.js"
             ],
+            "c/managerGoal": [
+                "managerGoal/managerGoal.js"
+            ],
+            "c/myMonthlyBudgets": [
+                "myMonthlyBudgets/myMonthlyBudgets.js"
+            ],
             "c/newAsset": [
                 "newAsset/newAsset.js"
             ],
