@@ -1,0 +1,51 @@
+<template>
+    <lightning-card title="Opportunity List" icon-name="standard:opportunity">
+        <div class="slds-p-around_x-small">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Edit">Select</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Account Name">Opportunity Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Industry">Target Start Date</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Phone">Amount</div>
+                        </th>                        
+                        <th class='' scope="col">
+                            <lightning-helptext content="Narrow the list of opps. For example if job has sod in name search 'sod'"></lightning-helptext>
+                            <lightning-input  type="text" label="Search Opportunity Names" 
+                            value={query} onchange={look}></lightning-input >
+                             
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={copy} for:item="c"> 
+                        <tr key={c.Id} class="slds-hint-parent">
+                            <td data-label="Prospecting">
+                                <div class="slds-truncate" title="Select">
+                                    <lightning-input type="checkbox-button" label="select" variant="label-hidden" onchange={handleClick} name={c.Name}></lightning-input>
+                                   
+                                </div>
+                            </td>                                
+                            <td data-label="Prospecting">
+                                <div class="slds-truncate" title="Account Name">{c.Name}</div>
+                            </td>
+                            <td data-label="Confidence">
+                                <div class="slds-truncate" title="Industry">{c.Target_Start_Date__c}</div>
+                            </td>
+                            <td data-label="Confidence">
+                                <div class="slds-truncate" title="Phone">{c.Amount}</div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+</template>
