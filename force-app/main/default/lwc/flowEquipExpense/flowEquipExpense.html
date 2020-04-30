@@ -20,7 +20,7 @@
         <div class="slds-grid slds-m-left_small">
             <div class="slds-col slds-size_9-of-12 ">
                 <lightning-input type="number" label="Amount"
-                formatter="currency" required value={expAmount} onchange={newAmount}></lightning-input>
+                formatter="currency" required  step="0.01" value={expAmount} onchange={newAmount}></lightning-input>
             </div>
         </div>
         <div class='slds-grid slds-m-left_small'>
