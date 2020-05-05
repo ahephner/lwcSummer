@@ -29,6 +29,9 @@
             ],
             "c/pubsub": [
                 "pubsub/pubsub.js"
+            ],
+            "c/opportunityFlow": [
+                "opportunityFlow/opportunityFlow.js"
             ]
         }
     },
