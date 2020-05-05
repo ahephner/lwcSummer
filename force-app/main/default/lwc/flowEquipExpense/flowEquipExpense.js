@@ -63,14 +63,15 @@ export default class FlowEquipExpense extends LightningElement {
         return [
             {label: 'PM', value: 'PM'},
             {label: 'Tires', value: 'Tires'},
-            {label: 'Repair', value: 'Repair'}
+            {label: 'Repair', value: 'Repair'},
+            {label: 'Miscellaneous', value:'Miscellaneous'}
         ]
         
     }
 
     newType(e){
         this.expType = e.detail.value; 
-        
+        console.log(this.expType);         
     }
 
     newAmount(c){
