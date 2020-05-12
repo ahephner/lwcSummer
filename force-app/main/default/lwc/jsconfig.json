@@ -18,6 +18,9 @@
             "c/flowExample": [
                 "flowExample/flowExample.js"
             ],
+            "c/goalsTable": [
+                "goalsTable/goalsTable.js"
+            ],
             "c/managerGoal": [
                 "managerGoal/managerGoal.js"
             ],
