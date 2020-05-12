@@ -12,6 +12,11 @@ export default class OpportunityFlow extends LightningElement {
     
     connectedCallback(){
         this.copy = this.ops; 
+        // this.copy.forEach(element => {
+        //     console.log(element);
+            
+        // });
+        
     }
     look(search){
         this.copy = this.ops; 
@@ -25,11 +30,13 @@ export default class OpportunityFlow extends LightningElement {
         console.log(e.currentTarget);
         
         
-        if(!this.selectedOps.includes(e.currentTarget.name))
-            this.selectedOps.push(e.currentTarget.name);
-        else{
+        if(!this.selectedOps.includes(e.currentTarget.name)){
+            let opp = this.copy.filter(x => x.Id == e.currentTarget.name )
+            this.selectedOps.push(...opp);
+            console.log('selected ops ' +this.selectedOps);
+        }else{
             for(let i = 0; i < this.selectedOps.length; i++){
-                if(e.currentTarget.name === this.selectedOps[i])
+                if(e.currentTarget.name === this.selectedOps[i].Id)
                     this.selectedOps.splice(i, 1);
                 } 
             }
@@ -37,4 +44,3 @@ export default class OpportunityFlow extends LightningElement {
     }
 }
 
-  
