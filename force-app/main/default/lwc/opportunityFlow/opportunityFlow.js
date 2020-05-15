@@ -24,10 +24,18 @@ export default class OpportunityFlow extends LightningElement {
         this.copy = this.copy.filter(x=> x.Name.toLowerCase().includes(this.query));
         
     }
+    selectAll(){
+        let i; 
+        let checkboxes = this.template.querySelectorAll('[data-id="checkbox"]')
+        for(i=0; i<checkboxes.length; i++) {
+            checkboxes[i].checked = e.currentTarget.checked;
+        }
+    }
 //adds the targets to be shared with the flow
 //if there selected ops Id is already in the array then dump
  //wont work on browser IE <11 because of .find()S   
     handleClick(e){
+        console.log(e.currentTarget)
         console.log(e.currentTarget.name);
         //see if the value is already in the array
         let add = this.selectedOps.find(x => x.Id === e.currentTarget.name);
@@ -43,6 +51,8 @@ export default class OpportunityFlow extends LightningElement {
         }
         //turn array to string 
             this.selectedOpsString = JSON.stringify(this.selectedOps); 
+
+
 
     }
 }
