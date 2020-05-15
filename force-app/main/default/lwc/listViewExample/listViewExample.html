@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title=" List View Example" icon-name="standard:action_list_component">
+ 
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Id">Account Id</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Account Name">Account Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Type">Type</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Phone">Phone</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+               <!-- have to call it just like below. You need console.log the return then pay attention to the way the data is structured
+               for example Customer__r.displayValue. There is also a value too returned which could be an id string
+               if nothing is set on the goal for that field it's null and will break the display -->
+                   <template for:each={data} for:item='d'>
+                        <tr class="slds-hint-parent" key={d.id}>
+                            <td data-label="id">{d.id}</td>
+                            <td data-label="Name"> {d.fields.Customer__r.displayValue}</td>
+                            <!-- <td data-label="Type"> {d.fields.Prev_Month_Rep_Forecast__c.displayValue}</td>
+                            <td data-label="Phone"> {d.fields.Current_Month_Prev_Year__c.displayValue}</td> -->
+                        </tr>
+                    </template>
+                        </tbody>
+                        </table>
+                    </lightning-card>
+                    </template>
+
+

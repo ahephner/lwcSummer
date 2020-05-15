@@ -35,6 +35,9 @@
             ],
             "c/opportunityFlow": [
                 "opportunityFlow/opportunityFlow.js"
+            ],
+            "c/listViewExample": [
+                "listViewExample/listViewExample.js"
             ]
         }
     },

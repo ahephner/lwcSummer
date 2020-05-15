@@ -1,36 +1,49 @@
-import { LightningElement, track } from 'lwc';
-import Id from '@salesforce/user/Id';
-import getGoals from '@salesforce/apex/getGoalsController.getGoals'; 
+/* eslint-disable no-console */
+import { LightningElement, track, wire } from 'lwc';
+import Id from '@salesforce/user/Id'
+import getGoals from '@salesforce/apex/getGoalsController.getGoals'
 const columns = [
-    {label: 'Sales Goal Name', field: 'Name'},
-    {label: 'Customer', field: 'Customer__c'},
-    //{label: 'April 2020', field: 'Prev_Month_Rep_Forecast__c', type:'currency'},
-    //{label: 'May 2019', field: 'Current_Month_Prev_Year__c', type:'currency'},
-    {label: 'Forecast', field:'Forecast_Amount__c', type:'currency', editable: true},
-    {label: 'Comment', field:'Updates__c', type:'text', editable:true }, 
+    {label: 'Sales Goal Name', fieldName: 'Name'},
+    {label: 'Customer', fieldName: 'Customer__c'},
+    {label: 'April 2020', field: 'Prev_Month_Rep_Forecast__c', type:'currency'},
+    {label: 'May 2019', field: 'Current_Month_Prev_Year__c', type:'currency'},
+    {label: 'Forecast', fieldName:'Forecast_Amount__c', type:'currency', editable: true},
+    {label: 'Comment', fieldName:'Updates__c', type:'text', editable:true }, 
 ]
 export default class GoalsTable extends LightningElement {
     userId = Id; 
     @track columns = columns; 
-    @track data; 
     @track error; 
-    
+    @track data =[]; 
     connectedCallback(){
-        console.log('userId ' +Id)
-        getGoals()
-        .then(result =>{
-            //const x = result.json();
-            console.log(this.result);
-            console.log(this.result.data);
+       console.log('callBack');
+       
+    }
+    
+    // @wire(getGoals)
+    // wiredGoals({error, data}){
+    //     if(data){
+    //         console.log(data);
             
+    //         this.data = data;
+    //     }else if(error){
+    //         this.error= error; 
+    //     }
+    // }
+
+    //Need to make sure apex is pointed toward rep not you
+    click(){
+        console.log('userId '+ this.userId + ' '+ Id);
+        
+    getGoals({userId: this.userId})
+        .then(r => {
+            console.log(r);
             
-            
-            
-            
-        }).catch(error=>{
-            this.error = error;
-        }).finally(()=>{
-            console.log(this.data)
-        });
+            this.data = r;
+        })
     }
 }
+
+        
+    
+  
