@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+//https://salesforce.stackexchange.com/questions/264976/re-evaulating-selected-rows-in-lightning-datatable-when-data-changed
 import { LightningElement,api, track } from 'lwc';
 //import { FlowNavigationNextEvent, FlowNavigationBackEvent, FlowAttributeChangeEvent} from 'lightning/flowSupport';
 
@@ -18,6 +19,9 @@ export default class OpportunityFlow extends LightningElement {
         // });
         
     }
+    //not hooked up right now. It's overwritting the table and not saving the check value
+    //to start make sure the html is uncommented. 
+    //playground link is https://developer.salesforce.com/docs/component-library/tools/playground/44Ya9dqV7/5/edit
     look(search){
         this.copy = this.ops; 
         this.query = search.detail.value.toLowerCase(); 
@@ -35,8 +39,10 @@ export default class OpportunityFlow extends LightningElement {
 //if there selected ops Id is already in the array then dump
  //wont work on browser IE <11 because of .find()S   
     handleClick(e){
-        console.log(e.currentTarget)
-        console.log(e.currentTarget.name);
+        console.log('target name '+e.target.name)
+        let boxList = this.template.querySelectorAll('.btn')
+        console.log('boxList '+boxList.length);
+        
         //see if the value is already in the array
         let add = this.selectedOps.find(x => x.Id === e.currentTarget.name);
         console.log(add, 1);
