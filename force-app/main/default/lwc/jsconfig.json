@@ -38,9 +38,6 @@
             ],
             "c/listViewExample": [
                 "listViewExample/listViewExample.js"
-            ],
-            "c/repForecast": [
-                "repForecast/repForecast.js"
             ]
         }
     },
