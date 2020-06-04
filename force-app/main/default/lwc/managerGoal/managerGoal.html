@@ -10,7 +10,12 @@
             </div>
             </div>
         </div>
-
+        <template if:true={loading}>
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+        <template if:true={loaded}>
             <div class='slds-col slds-size_1-of-3 slds-m-left_small card'>
                 <div class="slds-m-left_large">
                 <h3 class="slds-text-heading_medium">Your Entered Forecast This Month</h3>
@@ -21,5 +26,6 @@
                 </div>
                 </div>
             </div>
+        </template>
     </div>
 </template>

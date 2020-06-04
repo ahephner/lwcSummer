@@ -5,9 +5,9 @@ import getGoals from '@salesforce/apex/getGoalsController.getGoals'
 import { updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
-import ID_FIELD from '@salesforce/schema/Sales_Goal__c.Id';
-import Updates_FIELD from '@salesforce/schema/Sales_Goal__c.Updates__c'; 
-import Forecast_FIELD from '@salesforce/schema/Sales_Goal__c.Forecast_Amount__c'
+import { fireEvent } from 'c/pubsub';
+import { CurrentPageReference } from 'lightning/navigation';
+
 const columns = [
     {label: 'Sales Goal Name', fieldName: 'Name'},
     {label: 'Customer', fieldName: 'Customer_Name__c'},
@@ -23,6 +23,8 @@ export default class GoalsTable extends LightningElement {
     @track data =[]; 
     @track draftValues = []; 
     wiredGoalResult
+
+    @wire(CurrentPageReference)pageRef; 
     //load goals pass current user id to class
     @wire(getGoals, {userId: '$userId'})
         goalList(result){
@@ -74,8 +76,10 @@ export default class GoalsTable extends LightningElement {
  
 
     //Need to make sure apex is pointed toward rep not you
-    click(){
-        console.log('userId '+ this.userId + ' '+ Id);
+    refresh(){
+       fireEvent(this.pageRef, 'update', this);
+       console.log('updating...');
+       
     }
     // getGoals({userId: this.userId})
     //     .then(r => {
