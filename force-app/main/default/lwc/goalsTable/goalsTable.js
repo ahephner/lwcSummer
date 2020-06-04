@@ -4,6 +4,7 @@ import Id from '@salesforce/user/Id'
 import getGoals from '@salesforce/apex/getGoalsController.getGoals'
 import { updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 import ID_FIELD from '@salesforce/schema/Sales_Goal__c.Id';
 import Updates_FIELD from '@salesforce/schema/Sales_Goal__c.Updates__c'; 
 import Forecast_FIELD from '@salesforce/schema/Sales_Goal__c.Forecast_Amount__c'
@@ -21,22 +22,27 @@ export default class GoalsTable extends LightningElement {
     @track error; 
     @track data =[]; 
     @track draftValues = []; 
-    connectedCallback(){
-       console.log('callBack '+this.userId);
-       getGoals({userId: this.userId})
-        .then(r => {
-            
-            this.data = r;
-        })
-       
-    }
+    wiredGoalResult
+    //load goals pass current user id to class
+    @wire(getGoals, {userId: '$userId'})
+        goalList(result){
+            this.wiredGoalResult = result;
+            console.log(result.data)
+            if(result.data){
+                this.data = result.data; 
+                this.error = undefined;
+            }else if(result.error){
+                this.data = undefined;
+                this.error = result.error;
+            }
+        } 
 
     handleSave(event){
         const recordInputs =  event.detail.draftValues.slice().map(draft => {
             const fields = Object.assign({}, draft);
             return { fields };
         });
-    console.log(event.detail.draftValues);
+   
     
         const promises = recordInputs.map(recordInput => updateRecord(recordInput));
         Promise.all(promises).then(goals => {
@@ -51,8 +57,10 @@ export default class GoalsTable extends LightningElement {
              this.draftValues = [];
     
              // Display fresh data in the datatable
-            return refreshApex(this.getGoals);
+            return refreshApex(this.wiredGoalResult);
         }).catch(error => {
+            console.log(error);
+            
             // Handle error
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -61,44 +69,9 @@ export default class GoalsTable extends LightningElement {
                     variant: 'error'
                 })
             )
-        });
-        
-        // updateRecord(recordInput)
-        // .then(() => {
-        //     this.dispatchEvent(
-        //         new ShowToastEvent({
-        //             title: 'Success',
-        //             message: 'Contact updated',
-        //             variant: 'success'
-        //         })
-        //     );
-        //     // Clear all draft values
-        //     this.draftValues = [];
-
-        //     // Display fresh data in the datatable
-        //    // return refreshApex(this.getGoals({userId: this.userId}));
-        // }).catch(error => {
-        //     this.dispatchEvent(
-        //         new ShowToastEvent({
-        //             title: 'Error creating record',
-        //             message: error.body.message,
-        //             variant: 'error'
-        //         })
-        //     );
-        // });
-
-        
+        });       
     }
-    // @wire(getGoals)
-    // wiredGoals({error, data}){
-    //     if(data){
-    //         console.log(data);
-            
-    //         this.data = data;
-    //     }else if(error){
-    //         this.error= error; 
-    //     }
-    // }
+ 
 
     //Need to make sure apex is pointed toward rep not you
     click(){
