@@ -41,6 +41,9 @@
             ],
             "c/salesGoalNewGoalModal": [
                 "salesGoalNewGoalModal/salesGoalNewGoalModal.js"
+            ],
+            "c/goalAccountList": [
+                "goalAccountList/goalAccountList.js"
             ]
         }
     },
