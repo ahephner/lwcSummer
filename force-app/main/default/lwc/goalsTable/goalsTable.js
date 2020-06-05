@@ -81,12 +81,13 @@ export default class GoalsTable extends LightningElement {
        console.log('updating...');
        
     }
-    // getGoals({userId: this.userId})
-    //     .then(r => {
-            
-    //         this.data = r;
-    //     })
-    // }
+    loadMore(event){
+
+    }
+    // to open modal set isModalOpen tarck value as true
+    openModal() {
+        fireEvent(this.pageRef, 'open', this)
+    }
 
 }
 

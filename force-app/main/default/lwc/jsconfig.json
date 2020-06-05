@@ -38,6 +38,9 @@
             ],
             "c/listViewExample": [
                 "listViewExample/listViewExample.js"
+            ],
+            "c/salesGoalNewGoalModal": [
+                "salesGoalNewGoalModal/salesGoalNewGoalModal.js"
             ]
         }
     },

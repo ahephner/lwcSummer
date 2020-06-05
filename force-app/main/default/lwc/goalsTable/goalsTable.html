@@ -1,16 +1,23 @@
 <template>
     <lightning-card title="Sales Goals">
         <div style="height: 300px;">
-           <lightning-button variant="brand" label="Refresh" title="Primary action" onclick={refresh} class="slds-m-left_x-small"></lightning-button>
-            <lightning-datatable
+           <lightning-button variant="brand" label="Refresh Total" title="Primary action" onclick={refresh} class="slds-m-left_x-small"></lightning-button>
+           <lightning-button variant="brand"
+           label="New Goal"
+           title="What is Modal/PopUp in LWC?"
+           onclick={openModal}
+           class="slds-m-left_x-small">
+        </lightning-button> 
+           <lightning-datatable
                     key-field="Id"
                     data={data}
                     show-row-number-column
                     row-number-offset={rowOffset}
                     columns={columns}
                     onsave={handleSave}
-                    draft-values={draftValues}>
-                    
+                    draft-values={draftValues}
+                    enable-infinite-loading
+                    onloadmore={loadMore}>
             </lightning-datatable>
         </div>
     </lightning-card>
