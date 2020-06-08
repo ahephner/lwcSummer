@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, wire,api } from 'lwc';
 import Id from '@salesforce/user/Id'
 import getGoals from '@salesforce/apex/getGoalsController.getGoals'
+import getRepId from '@salesforce/apex/getGoalsController.getRepId';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
@@ -22,9 +23,12 @@ export default class GoalsTable extends LightningElement {
     @track error; 
     @track data =[]; 
     @track draftValues = []; 
+    @api repId
     wiredGoalResult
 
     @wire(CurrentPageReference)pageRef; 
+
+            
     //load goals pass current user id to class
     @wire(getGoals, {userId: '$userId'})
         goalList(result){
@@ -38,6 +42,19 @@ export default class GoalsTable extends LightningElement {
                 this.error = result.error;
             }
         } 
+                //load rep id
+                @wire(getRepId, {userId: '$userId'})
+                loadRep({error, data}){
+                    if(data){
+                        this.repId = data;
+                        console.log(data + '  rep');
+                        
+                    }else if(error){
+                        alert('There is an issue please call IT')
+                        console.log(error);
+                        
+                    }
+                }
 
     handleSave(event){
         const recordInputs =  event.detail.draftValues.slice().map(draft => {

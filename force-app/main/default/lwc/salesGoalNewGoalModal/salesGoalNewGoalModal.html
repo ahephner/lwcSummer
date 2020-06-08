@@ -55,8 +55,11 @@
                 </div>                    
                         <!--comment--> 
                             <div class='slds-grid'>
-                                <div class="slds-col slds-size_1-of-1">
-                                    <lightning-input type="text" label="Comment"></lightning-input>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input type="text" label="Comment" onchange={newComment}></lightning-input>
+                                </div>
+                                <div class='slds-col slds-size_1-of-2'>
+                                    <lightning-input type='date' lable='date' onchange={dateChange}></lightning-input>
                                 </div>
                             </div>
                     </div>
