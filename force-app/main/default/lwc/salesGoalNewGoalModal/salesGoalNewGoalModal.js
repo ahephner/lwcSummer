@@ -26,15 +26,12 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         @track startDate;
         @track endDate;
         @api repId; 
-        @track date; 
+         
         //need pageRef for pub/sub
         @wire(CurrentPageReference)pageRef; 
         @track error;
 
-        dateChange(event){
-            this.date = event.detail.value; 
-        }
-
+//may need to reroute the call backs will embed this into the main table soon 
         connectedCallback(){
             registerListener('open', this.open, this)
         }
@@ -103,9 +100,11 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             this.searchKey = event.target.prods.Name; 
             this.show = false;
         }
-
+//lets add the spinner here as well 
         save() {
             //set dates
+            //6/8/2020 date not working correctly need to have 2020-06-08
+            //this is producing 06/01/2020 sf not flexiable
             const date = new Date(); 
             const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
             const lastDay = new Date(date.getFullYear(), date.getMonth()+1, 0)
@@ -115,8 +114,10 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             const fields = {};
             fields[BUDGET_TYPE.fieldApiName] = 'Monthly Sales';
             fields[FORECAST_AMOUNT.fieldApiName] = this.forecast;
-            fields[START_DATE.fieldApiName] =  this.date;    
+            fields[START_DATE.fieldApiName] =  '2020-06-01';    
            // fields[END_DATE.fieldApiName] = '2020-06-08' //this.endDate
+           //hardedcoded ID need to get rep id. I think I am going to try and embed this component in the table component since I can get id using
+           //the wire there with a user id already. Will need to rerout the dispatch events. Will create record when hardcoded values are passed
             fields[SALES_REP.fieldApiName] = 'a002h000000wF99AAE' //this.repId; 
             fields[UPDATES.fieldApiName] = this.comment;
             fields[ACCOUNT_ID.fieldApiName] = this.accountId;
