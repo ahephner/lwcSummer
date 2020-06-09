@@ -25,7 +25,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         @track accountId; 
         @track startDate;
         @track endDate;
-        @api repId; 
+        @track repId; 
          
         //need pageRef for pub/sub
         @wire(CurrentPageReference)pageRef; 
@@ -38,11 +38,12 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         disconnectedCallback(){
             unregisterAllListeners(this)
         }
-        //open modal
-        open(){
+        //open modal and set repId. repId is passed on the call from goaltable
+        open(x){
             this.isModalOpen = true; 
-            console.log('api this rep' +this.repId);
-            
+            if(this.repId ===undefined){
+                this.repId = x; 
+            }
         }
         closeModal() {
             // to close modal set isModalOpen tarck value as false
@@ -118,7 +119,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
            // fields[END_DATE.fieldApiName] = '2020-06-08' //this.endDate
            //hardedcoded ID need to get rep id. I think I am going to try and embed this component in the table component since I can get id using
            //the wire there with a user id already. Will need to rerout the dispatch events. Will create record when hardcoded values are passed
-            fields[SALES_REP.fieldApiName] = 'a002h000000wF99AAE' //this.repId; 
+            fields[SALES_REP.fieldApiName] = this.repId; 
             fields[UPDATES.fieldApiName] = this.comment;
             fields[ACCOUNT_ID.fieldApiName] = this.accountId;
             console.log(fields);

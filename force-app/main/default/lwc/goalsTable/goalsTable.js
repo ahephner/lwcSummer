@@ -103,7 +103,7 @@ export default class GoalsTable extends LightningElement {
     }
     // to open modal set isModalOpen tarck value as true
     openModal() {
-        fireEvent(this.pageRef, 'open', this)
+        fireEvent(this.pageRef, 'open', this.repId)
     }
 
 }

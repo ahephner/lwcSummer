@@ -1,7 +1,9 @@
 <template>
     <lightning-card title="Sales Goals">
         <div style="height: 300px;">
-           <lightning-button variant="brand" label="Refresh Total" title="Primary action" onclick={refresh} class="slds-m-left_x-small"></lightning-button>
+           <lightning-button variant="brand" 
+           label="Refresh Total" title="Primary action" 
+           onclick={refresh} class="slds-m-left_x-small"></lightning-button>
            <lightning-button variant="brand"
            label="New Goal"
            title="What is Modal/PopUp in LWC?"
@@ -21,7 +23,8 @@
             </lightning-datatable>
         </div>
     </lightning-card>
-   <!-- <template if:true={showModal}>
+    <!--new goal modal
+  <template if:true={showModal}>
         <c-sales-goal-new-goal-modal></c-sales-goal-new-goal-modal>
     </template>-->
 </template>
