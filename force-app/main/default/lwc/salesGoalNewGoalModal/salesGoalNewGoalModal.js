@@ -109,16 +109,14 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             //6/8/2020 date not working correctly need to have 2020-06-08
             //this is producing 06/01/2020 sf not flexiable
             const date = new Date(); 
-            const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            const lastDay = new Date(date.getFullYear(), date.getMonth()+1, 0)
-            this.startDate = firstDay.toLocaleDateString();
-            this.endDate = lastDay.toLocaleDateString();
+            this.startDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0,10);
+            this.endDate = new Date(date.getFullYear(), date.getMonth()+1, 0).toISOString().slice(0,10);
             //set field values for new goal
             const fields = {};
             fields[BUDGET_TYPE.fieldApiName] = 'Monthly Sales';
             fields[FORECAST_AMOUNT.fieldApiName] = this.forecast;
-            fields[START_DATE.fieldApiName] =  '2020-06-01';    
-           // fields[END_DATE.fieldApiName] = '2020-06-08' //this.endDate
+            fields[START_DATE.fieldApiName] =  this.startDate;    
+            fields[END_DATE.fieldApiName] = this.endDate
            //hardedcoded ID need to get rep id. I think I am going to try and embed this component in the table component since I can get id using
            //the wire there with a user id already. Will need to rerout the dispatch events. Will create record when hardcoded values are passed
             fields[SALES_REP.fieldApiName] = this.repId; 
