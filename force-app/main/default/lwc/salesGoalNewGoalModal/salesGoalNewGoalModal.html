@@ -22,9 +22,9 @@
                 </header>
                 <!-- Modal/Popup Box LWC body starts here -->
                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                        <div class="slds-m-top_medium slds-m-bottom_x-large slds-grid">
+                        <div class="slds-m-top_medium slds-m-bottom_x-small slds-grid">
                             <!-- Account Lookup -->
-                            <div class="slds-col slds-size_2-of-3">
+                            <div class="slds-col slds-size_2-of-4">
                                <lightning-input
                                 name="enter-search"
                                 label="Account"
@@ -35,7 +35,7 @@
                                 ></lightning-input>
                             </div>
                             <!--Forecast Amount-->
-                            <div class="slds-col slds-size_1-of-3 slds-m-left_medium slds-m-righ_x-small">
+                            <div class="slds-col slds-size_1-of-4 slds-m-left_medium slds-m-righ_x-small">
                                 <lightning-input type="number" onchange={newForecast}
                                             name="input7" label="Forecast Amount" 
                                             formatter="currency" step="0.01"></lightning-input>
@@ -45,7 +45,7 @@
                     <div class='slds-grid'>
                         <div class='slds-col slds-size_2-of-3'>
                         <template if:true={show} >
-                            <div class='slds-m-top_x-small' onaccountselect={handleAccountSelect}>
+                            <div class='slds-m-top_x-small' onaccountselect={handleAccountSelect} style='z-index: -1;'>
                             <template for:each={prod} for:item='prods'>
                                 <c-goal-account-list key={prods.id} prods={prods}></c-goal-account-list>
                             </template>

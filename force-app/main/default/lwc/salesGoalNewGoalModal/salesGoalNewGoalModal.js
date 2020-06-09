@@ -18,7 +18,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         @track isModalOpen = false;
          searchKey = ''; 
         @track prod; 
-        @track none; 
+        @track setAccount = false; 
         @track show; 
         @track forecast;
         @track comment; 
@@ -54,7 +54,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
     //send search to apex
     @wire(searchAccount, {searchKey: '$searchKey'})
     loadProd({error, data}){
-        if(data){
+        if(data && this.setAccount === false){
             this.prod= data;
             this.error = undefined;
             
@@ -75,12 +75,13 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         }
         //search for account
         search(event){
+            this.setAccount = false; 
             window.clearTimeout(this.delayTimeout);
             const searchKey = event.target.value; 
             // eslint-disable-next-line @lwc/lwc/no-async-operation
             this.delayTimeout = setTimeout(() =>{
                 this.searchKey = searchKey;
-                
+                    
             }, 400);
             
             
@@ -101,6 +102,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             this.accountId = event.target.prods.Id; 
             this.searchKey = event.target.prods.Name; 
             this.show = false;
+            this.setAccount = true; 
         }
 
         save() {

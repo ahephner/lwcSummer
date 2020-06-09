@@ -10,7 +10,8 @@ import { fireEvent } from 'c/pubsub';
 import { CurrentPageReference } from 'lightning/navigation';
 
 const columns = [
-    {label: 'Sales Goal Name', fieldName: 'Name'},
+    //{label: 'Sales Goal Name', fieldName: 'Name'},
+    {label: 'Goal', fieldName: 'nameURL', type:'url', typeAttributes: {label: {fieldName: 'Name'}}, target: '_blank'},
     {label: 'Customer', fieldName: 'Customer_Name__c'},
     {label: 'April 2020', fieldName: 'Prev_Month_Rep_Forecast__c', type:'currency'},
     {label: 'May 2019', fieldName: 'Current_Month_Prev_Year__c', type:'currency'},
@@ -30,12 +31,18 @@ export default class GoalsTable extends LightningElement {
 
             
     //load goals pass current user id to class
+    //map over data and set the name to contain a url to the record page
     @wire(getGoals, {userId: '$userId'})
         goalList(result){
             this.wiredGoalResult = result;
             console.log(result.data)
             if(result.data){
-                this.data = result.data; 
+                let nameURL; 
+                this.data = result.data.map(row=>{
+                    nameURL = `/${row.Id}`;
+                    return {...row, nameURL}
+
+                }); 
                 this.error = undefined;
             }else if(result.error){
                 this.data = undefined;
