@@ -26,6 +26,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         @track startDate;
         @track endDate;
         @track repId; 
+        @track showSpinner = false; 
          
         //need pageRef for pub/sub
         @wire(CurrentPageReference)pageRef; 
@@ -101,8 +102,9 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             this.searchKey = event.target.prods.Name; 
             this.show = false;
         }
-//lets add the spinner here as well 
+
         save() {
+            this.showSpinner = true; 
             //set dates
             //6/8/2020 date not working correctly need to have 2020-06-08
             //this is producing 06/01/2020 sf not flexiable
@@ -128,6 +130,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             //create record close modal or show error
             createRecord(recordInput)
             .then(goal => {
+                this.showSpinner = false; 
                 this.isModalOpen = false;
                 this.dispatchEvent(
                     new ShowToastEvent({
