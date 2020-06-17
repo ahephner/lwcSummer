@@ -64,7 +64,8 @@ export default class FlowEquipExpense extends LightningElement {
             {label: 'PM', value: 'PM'},
             {label: 'Tires', value: 'Tires'},
             {label: 'Repair', value: 'Repair'},
-            {label: 'Miscellaneous', value:'Miscellaneous'}
+            {label: 'Miscellaneous', value:'Miscellaneous'},
+            {label: 'Tolls', value: 'Tolls'}
         ]
         
     }

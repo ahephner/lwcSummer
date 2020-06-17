@@ -50,11 +50,11 @@
                                 <c-goal-account-list key={prods.id} prods={prods}></c-goal-account-list>
                             </template>
                             </div>
-                            <template if:false={show}>
-                                <div class="slds-align_absolute-center slds-m-vertical_small">
-                                    No product found..
-                                </div>
-                            </template>
+                        </template>
+                        <template if:false={show}>
+                            <div class="slds-align_absolute-center slds-m-vertical_small">
+                                <a href='#' onclick={createLead}>Couldn't find the account want to make a lead?</a>
+                            </div>
                         </template>
                     </div>
                 </div>                    

@@ -52,6 +52,8 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         }
 
     //send search to apex
+    //working on getting the nothing returned now mostly need to fix html so the if true makes sense
+    //think wrapping entire output template in another template would stop from starting with nothing shown
     @wire(searchAccount, {searchKey: '$searchKey'})
     loadProd({error, data}){
         if(data && this.setAccount === false){
@@ -60,7 +62,12 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             
             this.showWhat(this.prod.length);
             
-        }else if (error){
+        }else if(data === null){
+            console.log('we are false');
+            
+            this.show = false;
+        }
+        else if (error){
             this.error = error;
             this.data = undefined;
             console.log(this.error);
@@ -70,6 +77,8 @@ export default class SalesGoalNewGoalModal extends LightningElement {
     }
         showWhat(x){
             if(x> 0){
+                console.log('here is x ' + x);
+                
                 this.show = true; 
             }
         }
