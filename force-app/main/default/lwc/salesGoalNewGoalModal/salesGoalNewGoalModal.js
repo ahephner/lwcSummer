@@ -20,6 +20,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         @track prod; 
         @track setAccount = false; 
         @track show; 
+        @track noResult;
         @track forecast;
         @track comment; 
         @track accountId; 
@@ -49,23 +50,21 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         closeModal() {
             // to close modal set isModalOpen tarck value as false
             this.isModalOpen = false;
+            this.searchKey = '';
+            this.show= false; 
+            this.noResult = false;
         }
 
     //send search to apex
     //working on getting the nothing returned now mostly need to fix html so the if true makes sense
     //think wrapping entire output template in another template would stop from starting with nothing shown
     @wire(searchAccount, {searchKey: '$searchKey'})
-    loadProd({error, data}){
+    loadProd({error, data}){        
         if(data && this.setAccount === false){
             this.prod= data;
             this.error = undefined;
-            
             this.showWhat(this.prod.length);
             
-        }else if(data === null){
-            console.log('we are false');
-            
-            this.show = false;
         }
         else if (error){
             this.error = error;
@@ -78,8 +77,13 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         showWhat(x){
             if(x> 0){
                 console.log('here is x ' + x);
-                
+                this.noResult = false; 
                 this.show = true; 
+            }else if(x <=0){
+                console.log('x '+x);
+                this.noResult = true; 
+                this.show = false; 
+                
             }
         }
         //search for account
@@ -111,7 +115,13 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             this.accountId = event.target.prods.Id; 
             this.searchKey = event.target.prods.Name; 
             this.show = false;
+            this.noResult = false; 
             this.setAccount = true; 
+            
+        }
+
+        createLead(){
+            console.log('create lead')
         }
 
         save() {

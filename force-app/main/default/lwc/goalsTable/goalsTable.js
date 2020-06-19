@@ -20,6 +20,7 @@ const columns = [
 ]
 export default class GoalsTable extends LightningElement {
     userId = Id; 
+    phone = Phone; 
     @track columns = columns; 
     @track error; 
     @track data =[]; 
