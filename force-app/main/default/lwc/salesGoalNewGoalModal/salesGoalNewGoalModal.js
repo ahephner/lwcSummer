@@ -91,13 +91,17 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             this.setAccount = false; 
             window.clearTimeout(this.delayTimeout);
             const searchKey = event.target.value; 
+             if(searchKey ===''){
+                 this.noResult = false;
+                 this.show = false; 
+             }else{
             // eslint-disable-next-line @lwc/lwc/no-async-operation
             this.delayTimeout = setTimeout(() =>{
                 this.searchKey = searchKey;
                     
             }, 400);
             
-            
+         }  
         }
 
         newForecast(event){
