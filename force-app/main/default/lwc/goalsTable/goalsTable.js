@@ -19,12 +19,12 @@ const columns = [
     {label: 'Comment', fieldName:'Updates__c', type:'text', editable:true }, 
 ]
 export default class GoalsTable extends LightningElement {
-    userId = Id; 
-    phone = Phone; 
+    userId = Id;  
     @track columns = columns; 
     @track error; 
     @track data =[]; 
     @track draftValues = []; 
+    @track spin; 
     @api repId
     wiredGoalResult
 
@@ -65,6 +65,8 @@ export default class GoalsTable extends LightningElement {
                 }
 
     handleSave(event){
+        this.spin = true; 
+        
         const recordInputs =  event.detail.draftValues.slice().map(draft => {
             const fields = Object.assign({}, draft);
             return { fields };
@@ -96,7 +98,10 @@ export default class GoalsTable extends LightningElement {
                     variant: 'error'
                 })
             )
-        });       
+        });
+        this.spin = false; 
+
+               
     }
  
 

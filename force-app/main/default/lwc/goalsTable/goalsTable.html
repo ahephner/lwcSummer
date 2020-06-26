@@ -1,5 +1,9 @@
 <template>
     <lightning-card title="Sales Goals">
+        <template if:true={spin}>
+            <lightning-spinner alternative-text='loading' size='large'></lightning-spinner>
+        </template>
+        <template if:false={spin}>
         <div style="height: 300px;">
            <lightning-button variant="brand" 
            label="Refresh Total" title="Primary action" 
@@ -22,6 +26,7 @@
                     onloadmore={loadMore}>
             </lightning-datatable>
         </div>
+    </template>
     </lightning-card>
     <!--new goal modal
   <template if:true={showModal}>

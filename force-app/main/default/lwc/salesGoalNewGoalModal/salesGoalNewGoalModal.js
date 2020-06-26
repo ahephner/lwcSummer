@@ -74,6 +74,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         }
 
     }
+    //this takes the lenght of data and if its more that one show the list otherwise show link for lead
         showWhat(x){
             if(x> 0){
                 console.log('here is x ' + x);
@@ -87,6 +88,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
             }
         }
         //search for account
+        //if the search is empty then show nothing
         search(event){
             this.setAccount = false; 
             window.clearTimeout(this.delayTimeout);
