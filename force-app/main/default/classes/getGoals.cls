@@ -4,7 +4,7 @@ public with sharing class getGoalsController {
         List<Sales_Goal__c> goals = [select id, Name, 
                                     Customer_Name__c,Prev_Month_Rep_Forecast__c,
                                     Current_Month_Prev_Year__c,Forecast_Amount__c,
-                                    Updates__c from Sales_Goal__c where  Current_Month_Goal__c = True 
+                                    Updates__c from Sales_Goal__c where  Date__c > 2020-01-01'1//Current_Month_Goal__c = True 
                                     and Sales_Rep__r.Salesforce_User__c =:userId];
         return goals; 
     }

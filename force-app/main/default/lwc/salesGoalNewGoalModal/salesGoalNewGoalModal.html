@@ -44,7 +44,10 @@
                         <!--Accounts returned in search-->
                         <div class='slds-grid'>
                             <template if:true={show} >
-                            <div class='slds-col slds-size_2-of-3 slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid  accounts_list" role="listbox'>
+                            <div class='slds-col slds-dropdown 
+                                slds-dropdown_length-with-icon-7 
+                                slds-dropdown_fluid  accounts_list
+                                slds-m-right_xx-large" role="listbox'>
                                 <div class='slds-m-top_x-small slds-listbox__item' onaccountselect={handleAccountSelect}>
                                     <template for:each={prod} for:item='prods'>
                                         <c-goal-account-list key={prods.id} prods={prods}></c-goal-account-list>
@@ -53,9 +56,11 @@
                             </div>
                             </template>
                             <template if:true={noResult}>
-                                <div class='slds-col slds-size_2-of-3 slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid  accounts_list" role="listbox'>
+                                <div class='slds-dropdown slds-dropdown_length-with-icon-7 
+                                    slds-dropdown_fluid  accounts_list
+                                    slds-m-right_xx-large" role="listbox'>
                                     <div class=" slds-m-vertical_small">
-                                        <a href='#' onclick={createLead}>Couldn't find the account want to make a lead?</a>
+                                        <a class='slds-m-left_small' href='#' onclick={createLead}>Couldn't find the account want to make a lead?</a>
                                     </div>
                                 </div>
                             </template>
