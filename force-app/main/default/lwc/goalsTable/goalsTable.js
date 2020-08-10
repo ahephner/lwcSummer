@@ -87,7 +87,13 @@ export default class GoalsTable extends LightningElement {
     
              // Display fresh data in the datatable
             return refreshApex(this.wiredGoalResult);
-        }).catch(error => {
+        })
+        .then(()=>{
+            console.log('second .then()');
+            
+            fireEvent(this.pageRef, 'update', this)
+        })
+        .catch(error => {
             console.log(error);
             
             // Handle error
@@ -107,13 +113,10 @@ export default class GoalsTable extends LightningElement {
 
     //Need to make sure apex is pointed toward rep not you
     refresh(){
-       fireEvent(this.pageRef, 'update', this);
-       console.log('updating...');
-       
+      // fireEvent(this.pageRef, 'update', this);
+       console.log('refresh');
     }
-    loadMore(event){
 
-    }
     // to open modal set isModalOpen tarck value as true
     openModal() {
         fireEvent(this.pageRef, 'open', this.repId)

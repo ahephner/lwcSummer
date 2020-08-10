@@ -49,6 +49,8 @@ export default class ManagerGoal extends LightningElement {
              }
 //this listens for the request to refresh
         connectedCallback(){
+            console.log('listening');
+            
             registerListener('update', this.refreshTotal, this);
         }
         disconnectedCallback(){

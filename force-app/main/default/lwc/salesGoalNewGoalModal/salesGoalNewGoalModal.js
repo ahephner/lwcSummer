@@ -1,9 +1,10 @@
-import { LightningElement, track, wire, api } from 'lwc';
-import { registerListener, unregisterAllListeners } from 'c/pubsub';
+import { LightningElement, track, wire } from 'lwc';
+import { registerListener, unregisterAllListeners, fireEvent } from 'c/pubsub';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { CurrentPageReference } from 'lightning/navigation';
 import { createRecord } from 'lightning/uiRecordApi';
 import searchAccount from '@salesforce/apex/getGoalsController.searchAccount'; 
+import { NavigationMixin } from 'lightning/navigation';
 
 import SALES_GOAL from '@salesforce/schema/sales_goal__c'; 
 import BUDGET_TYPE from '@salesforce/schema/sales_goal__c.Budget_Type__c'
@@ -13,7 +14,7 @@ import END_DATE from '@salesforce/schema/sales_goal__c.End_Date__c';
 import SALES_REP from '@salesforce/schema/sales_goal__c.Sales_Rep__c';
 import ACCOUNT_ID from '@salesforce/schema/sales_goal__c.Customer__c'; 
 import UPDATES from '@salesforce/schema/sales_goal__c.Updates__c';
-export default class SalesGoalNewGoalModal extends LightningElement {
+export default class SalesGoalNewGoalModal extends NavigationMixin(LightningElement) {
         //Boolean tracked variable to indicate if modal is open or not default value is false as modal is closed when page is loaded 
         @track isModalOpen = false;
          searchKey = ''; 
@@ -32,7 +33,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         //need pageRef for pub/sub
         @wire(CurrentPageReference)pageRef; 
         @track error;
-
+        leadId = '0122h0000001yGFAAY'; 
 //may need to reroute the call backs will embed this into the main table soon 
         connectedCallback(){
             registerListener('open', this.open, this)
@@ -127,7 +128,18 @@ export default class SalesGoalNewGoalModal extends LightningElement {
         }
 
         createLead(){
-            console.log('create lead')
+            console.log('leadID '+ this.leadId);
+            
+            this[NavigationMixin.Navigate]({
+                type: 'standard__objectPage',
+                attributes: {
+                    objectApiName: 'Account', 
+                    actionName: 'new'
+                },
+                state:{
+                    recordTypeId: this.leadId
+                }
+            }); 
         }
 
         save() {
@@ -164,6 +176,7 @@ export default class SalesGoalNewGoalModal extends LightningElement {
                         variant: 'success',
                     }),
                 );
+                fireEvent(this.pageRef, 'update', this)
             }).catch(error => {
                 this.dispatchEvent(
                     new ShowToastEvent({
@@ -172,6 +185,8 @@ export default class SalesGoalNewGoalModal extends LightningElement {
                         variant: 'error',
                     }),
                 );
+                this.showSpinner = false;
+                this.isModalOpen = false; 
             });
             
         }
