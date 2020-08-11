@@ -6,7 +6,7 @@ import getRepId from '@salesforce/apex/getGoalsController.getRepId';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
-import { fireEvent } from 'c/pubsub';
+import { fireEvent, registerListener, unregisterAllListeners } from 'c/pubsub';
 import { CurrentPageReference } from 'lightning/navigation';
 
 const columns = [
@@ -30,6 +30,9 @@ export default class GoalsTable extends LightningElement {
 
     @wire(CurrentPageReference)pageRef; 
 
+    connectedCallback(){
+        registerListener('updateTable', this.refresh, this)
+    }
             
     //load goals pass current user id to class
     //map over data and set the name to contain a url to the record page
@@ -112,9 +115,21 @@ export default class GoalsTable extends LightningElement {
  
 
     //Need to make sure apex is pointed toward rep not you
-    refresh(){
+    refresh(x){
       // fireEvent(this.pageRef, 'update', this);
-       console.log('refresh');
+    //    this.data.unshift({
+    //        Id:'1234',
+    //        Name: 'Unshift Goal',
+    //        Customer_Name__c: 'Aj unshift',
+    //        Forecast_Amount: 0,
+    //        Updates: '',
+
+    // })
+    // this.data = [...this.data]
+    console.log('params ' + x);
+    
+    
+    
     }
 
     // to open modal set isModalOpen tarck value as true

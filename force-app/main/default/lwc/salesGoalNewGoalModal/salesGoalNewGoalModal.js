@@ -112,9 +112,7 @@ export default class SalesGoalNewGoalModal extends NavigationMixin(LightningElem
         }
 
         newComment(e){
-            this.comment = e.detail.value; 
-               console.log(e.detail.value)
-               
+            this.comment = e.detail.value;  
            }
 
         handleAccountSelect(event){
@@ -167,6 +165,9 @@ export default class SalesGoalNewGoalModal extends NavigationMixin(LightningElem
             //create record close modal or show error
             createRecord(recordInput)
             .then(goal => {
+                //send to goal table
+                fireEvent(this.pageRef, 'updateTable', goal.id)
+                
                 this.showSpinner = false; 
                 this.isModalOpen = false;
                 this.dispatchEvent(
@@ -176,7 +177,8 @@ export default class SalesGoalNewGoalModal extends NavigationMixin(LightningElem
                         variant: 'success',
                     }),
                 );
-                fireEvent(this.pageRef, 'update', this)
+
+                
             }).catch(error => {
                 this.dispatchEvent(
                     new ShowToastEvent({
