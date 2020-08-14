@@ -36,8 +36,8 @@
                             </div>
                             <!--Forecast Amount-->
                             <div class="slds-col slds-size_1-of-4 slds-m-left_medium slds-m-righ_x-small">
-                                <lightning-input type="number" onchange={newForecast}
-                                            name="input7" label="Forecast Amount" 
+                                <lightning-input type="number" onchange={handleChange}
+                                            name="forecast" label="Forecast Amount" 
                                             formatter="currency" step="0.01"></lightning-input>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                         <!--comment--> 
                             <div class='slds-grid'>
                                 <div class="slds-col slds-size_1-of-2">
-                                    <lightning-input type="text" label="Comment" onchange={newComment}></lightning-input>
+                                    <lightning-input name='comment' type="text" label="Comment" onchange={handleChange}></lightning-input>
                                 </div>
                                 
                             </div>

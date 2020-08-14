@@ -22,8 +22,8 @@ export default class SalesGoalNewGoalModal extends NavigationMixin(LightningElem
         @track setAccount = false; 
         @track show; 
         @track noResult;
-        @track forecast;
-        @track comment; 
+        forecast = '';
+        comment = ''; 
         @track accountId; 
         @track startDate;
         @track endDate;
@@ -54,6 +54,19 @@ export default class SalesGoalNewGoalModal extends NavigationMixin(LightningElem
             this.searchKey = '';
             this.show= false; 
             this.noResult = false;
+        }
+
+        //summer 20 new release to track field values don't need @track anymore
+        //use the field name to grab which field set value this way
+        handleChange(e){
+            const field = e.target.name;
+            if(field === 'forecast'){
+                this.forecast = e.target.value;
+                console.log('new forecast '+this.forecast);
+                
+            } else if(field === 'comment'){
+                this.comment = e.target.value; 
+            }
         }
 
     //send search to apex
@@ -106,14 +119,6 @@ export default class SalesGoalNewGoalModal extends NavigationMixin(LightningElem
             
          }  
         }
-
-        newForecast(event){
-            this.forecast = event.detail.value; 
-        }
-
-        newComment(e){
-            this.comment = e.detail.value;  
-           }
 
         handleAccountSelect(event){
             console.log('selected '+ event.target.prods.Name)
