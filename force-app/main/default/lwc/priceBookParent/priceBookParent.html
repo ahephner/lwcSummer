@@ -1,0 +1,10 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Price Book Info" icon-name="utility:edit">
+         <div class='slds-m-around_small'>
+            <c-price-book-options product-num={name} record-id={recordId}></c-price-book-options>
+        </div> 
+        <div class='slds-m-around_small'>
+            <c-price-book-already-in product-num={name}></c-price-book-already-in>
+        </div>
+    </lightning-card>
+</template>

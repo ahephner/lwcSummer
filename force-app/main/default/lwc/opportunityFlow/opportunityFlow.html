@@ -16,12 +16,12 @@
                         <th class="" scope="col">
                             <div class="slds-truncate" title="Phone">Amount</div>
                         </th>                        
-                        <th class='' scope="col">
+                        <!-- <th class='' scope="col">
                             <lightning-helptext content="Narrow the list of opps. For example if job has sod in name search 'sod'"></lightning-helptext>
                             <lightning-input  type="text" label="Search Opportunity Names" 
                             value={query} onchange={look}></lightning-input >
                              
-                        </th>
+                        </th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +29,9 @@
                         <tr key={c.Id} class="slds-hint-parent">
                             <td data-label="Prospecting">
                                 <div class="slds-truncate" title="Select">
-                                    <lightning-input type="checkbox-button" label="select" variant="label-hidden" onchange={handleClick} name={c.Id}></lightning-input>
+                                    <lightning-input type="checkbox-button" class='btn' 
+                                    label="select" variant="label-hidden" data-id="checkbox" 
+                                    onchange={handleClick} name={c.Id}></lightning-input>
                                    
                                 </div>
                             </td>                                
@@ -42,13 +44,13 @@
                             <td data-label="Confidence">
                                 <div class="slds-truncate" title="Phone">{c.Amount}</div>
                             </td>
-                            <td data-label="Confidence">
-                                <div class="slds-truncate"></div>
-                            </td>
                         </tr>
                     </template>
                 </tbody>
             </table>
         </div>
+        <lightning-button 
+                    class="slds-m-right_x-small"
+                    label='next' variant="brand" onclick={handleNext}></lightning-button>
     </lightning-card>
 </template>

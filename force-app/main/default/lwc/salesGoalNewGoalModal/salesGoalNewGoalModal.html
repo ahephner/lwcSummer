@@ -1,0 +1,87 @@
+<template>
+    <!--Use template if:true to display/hide popup based on isModalOpen value--> 
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                    <!--spinner-->
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </template>
+        <template if:false={showSpinner}>
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Enter New Forecast</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-m-top_medium slds-m-bottom_x-small slds-grid">
+                            <!-- Account Lookup -->
+                            <div class="slds-col slds-size_2-of-4">
+                               <lightning-input
+                                name="enter-search"
+                                label="Account"
+                                type="search"
+                                placeholder='search for account'
+                                value={searchKey}
+                                onchange={search}
+                                ></lightning-input>
+                            </div>
+                            <!--Forecast Amount-->
+                            <div class="slds-col slds-size_1-of-4 slds-m-left_medium slds-m-righ_x-small">
+                                <lightning-input type="number" onchange={handleChange}
+                                            name="forecast" label="Forecast Amount" 
+                                            formatter="currency" step="0.01"></lightning-input>
+                            </div>
+                        </div>
+                        <!--Accounts returned in search-->
+                        <div class='slds-grid'>
+                            <template if:true={show} >
+                            <div class='slds-col slds-dropdown 
+                                slds-dropdown_length-with-icon-7 
+                                slds-dropdown_fluid  accounts_list
+                                slds-m-right_xx-large" role="listbox'>
+                                <div class='slds-m-top_x-small slds-listbox__item' onaccountselect={handleAccountSelect}>
+                                    <template for:each={prod} for:item='prods'>
+                                        <c-goal-account-list key={prods.id} prods={prods}></c-goal-account-list>
+                                    </template>
+                                </div>
+                            </div>
+                            </template>
+                            <template if:true={noResult}>
+                                <div class='slds-dropdown slds-dropdown_length-with-icon-7 
+                                    slds-dropdown_fluid  accounts_list
+                                    slds-m-right_xx-large" role="listbox'>
+                                    <div class=" slds-m-vertical_small">
+                                        <a class='slds-m-left_small' href='#' onclick={createLead}>Couldn't find the account want to make a lead?</a>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>                                   
+                        <!--comment--> 
+                            <div class='slds-grid'>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input name='comment' type="text" label="Comment" onchange={handleChange}></lightning-input>
+                                </div>
+                                
+                            </div>
+                    </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={save} title="OK">Save</button>
+                </footer>
+              </div>
+            </template>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+   </template> 
+ </template>

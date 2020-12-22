@@ -35,6 +35,15 @@
             ],
             "c/opportunityFlow": [
                 "opportunityFlow/opportunityFlow.js"
+            ],
+            "c/listViewExample": [
+                "listViewExample/listViewExample.js"
+            ],
+            "c/salesGoalNewGoalModal": [
+                "salesGoalNewGoalModal/salesGoalNewGoalModal.js"
+            ],
+            "c/goalAccountList": [
+                "goalAccountList/goalAccountList.js"
             ]
         }
     },
@@ -45,6 +54,11 @@
     "typeAcquisition": {
         "include": [
             "jest"
+        ]
+    },
+    "paths": {
+        "c/*": [
+            "*"
         ]
     }
 }
