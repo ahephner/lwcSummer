@@ -9,6 +9,7 @@ export default class OpportunityFlow extends LightningElement {
     @api selectedOps =[];
     @api selectedOpsString
     @api ops =[]; 
+    @api quoteName;
     @track query; 
     @track copy; 
     
@@ -18,13 +19,16 @@ export default class OpportunityFlow extends LightningElement {
         //     console.log(element);
             
         // });
+        console.log('quoteName '+this.quoteName);
         
     }
 
         //next page
         handleNext(){
             let ops = JSON.stringify(this.selectedOps)
-            getOps({ops: ops})
+            //console.log(ops);
+            
+            getOps({ops: ops, quoteName: this.quoteName})
             const nextNav = new FlowNavigationNextEvent();
             this.dispatchEvent(nextNav);
         }

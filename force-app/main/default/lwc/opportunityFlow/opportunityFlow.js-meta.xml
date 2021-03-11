@@ -13,6 +13,7 @@
             <property name="selectedOpsString" type="String" label="Selected Ops String"/>
             <property name="selectedOps" type="string[]" label='Selected Opportunities'/>
             <property name="ops" type="@salesforce/schema/opportunity[]" label='Opportunity'/>
+            <property name="quoteName" type="String" label='Multi-Quote Name'/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
