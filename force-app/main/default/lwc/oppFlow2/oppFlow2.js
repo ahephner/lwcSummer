@@ -1,34 +1,27 @@
-/* eslint-disable no-console */
-//https://salesforce.stackexchange.com/questions/264976/re-evaulating-selected-rows-in-lightning-datatable-when-data-changed
 import { LightningElement,api, track, wire } from 'lwc';
 import getOps from '@salesforce/apex/quipMultiQuote.getOps'; 
 import { FlowNavigationNextEvent} from 'lightning/flowSupport';
 
-export default class OpportunityFlow extends LightningElement {
-    @api recordId; 
-    @api selectedOps =[];
-    @api selectedOpsString
-    @api ops =[]; 
-    @api quoteName;
-    @api name; 
-    @track multiName;
-    @track query; 
-    @track copy; 
-    
+export default class OppFlow2 extends LightningElement {
+    @track selectedOps = []; 
+    @api ops = []; 
+    multiName; 
     connectedCallback(){
         this.copy = this.ops;
         // this.copy.forEach(element => {
-        //     console.log(element);
-            
+        //     console.log(element);    
         // });
-        if(this.quoteName === null){
-            this.quoteName = 'nothing passed'
-            this.multiName = 'nothing passed';
-        }else{
-            this.multiName = this.quoteName;
-        }
-    }
 
+    }
+    @api
+    get qName(){
+        return this.multiName;
+    }
+    set qName(x){
+        console.log('x '+x);
+        
+        this.multiName = x || 'not given';
+    }
         //next page
         handleNext(){
             let ops = JSON.stringify(this.selectedOps)
@@ -38,23 +31,7 @@ export default class OpportunityFlow extends LightningElement {
             const nextNav = new FlowNavigationNextEvent();
             this.dispatchEvent(nextNav);
         }
-    //not hooked up right now. It's overwritting the table and not saving the check value
-    //to start make sure the html is uncommented. 
-    //playground link is https://developer.salesforce.com/docs/component-library/tools/playground/44Ya9dqV7/5/edit
-    look(search){
-        this.copy = this.ops; 
-        this.query = search.detail.value.toLowerCase(); 
-        this.copy = this.copy.filter(x=> x.Name.toLowerCase().includes(this.query));
-        
-    }
-    selectAll(){
-        let i; 
-        let checkboxes = this.template.querySelectorAll('[data-id="checkbox"]')
-        for(i=0; i<checkboxes.length; i++) {
-            checkboxes[i].checked = e.currentTarget.checked;
-        }
-    }
-//adds the targets to be shared with the flow
+    //adds the targets to be shared with the flow
 //if there selected ops Id is already in the array then dump
  //wont work on browser IE <11 because of .find()S
  //commented out are from when we were pushing multiple lines from the opp to the flow. 
