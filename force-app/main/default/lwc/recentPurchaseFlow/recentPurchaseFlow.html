@@ -2,6 +2,18 @@
     <lightning-card  variant="Narrow"  title="Recent Purhases" icon-name="standard:account">
         <template if:true={found}>
             <p>{prodName}</p>
+            <lightning-datatable
+                key-field="ID"
+                data={data}
+                show-row-number-column
+                columns={columns}
+                sorted-by={Doc_Date__c}
+                default-sort-direction="desc"
+                >
+            </lightning-datatable>
+        </template>
+        <template if:false={found}>
+            <h4>No sales history found..</h4>
         </template>
         
     </lightning-card>
