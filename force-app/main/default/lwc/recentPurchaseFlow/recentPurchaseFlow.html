@@ -1,11 +1,13 @@
 <template>
-    <lightning-card  variant="Narrow"  title="Recent Purhases" icon-name="standard:account">
+    <lightning-card  variant="Narrow"  title="Last 5 item purchases" icon-name="standard:client">
         <template if:true={found}>
-            <p>{prodName}</p>
+            <p>Product Number: {prodName}</p>
+            <h1>I could put current cost or inventory or whatever here</h1>
             <lightning-datatable
                 key-field="ID"
                 data={data}
                 show-row-number-column
+                hide-checkbox-column
                 columns={columns}
                 sorted-by={Doc_Date__c}
                 default-sort-direction="desc"

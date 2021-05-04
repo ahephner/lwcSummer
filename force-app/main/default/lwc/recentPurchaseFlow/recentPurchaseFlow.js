@@ -1,10 +1,17 @@
 import { LightningElement,api, track } from 'lwc';
 
 const columns = [
-    //{label:'Doc', fieldName:'Sales_Document__c', type:'url', typeAttributes: {label: {fieldName: 'Name'}}, target: '_blank'},
-    {label:'Date', fieldName:'Doc_Date__c', type:'date'},
+    {label: 'Doc Detail', fieldName:'nameURL', type:'url', 
+    typeAttributes:{
+        label:{
+            fieldName:'Name'
+        },
+        target:'_blank'
+    }},
+    {label:'Date', fieldName:'Doc_Date__c', type:'date-local'},
     {label:'QTY', fieldName:'Qty__c', type:'number',cellAttributes: { alignment: 'center' },},
-    {label: 'Unit Price', fieldName:'Unit_Price__c', type:'currency', cellAttributes: { alignment: 'center' },}
+    {label: 'Unit Price', fieldName:'Unit_Price__c', type:'currency', cellAttributes: { alignment: 'center' },},
+    {label: 'Margin', fieldName:'margin', type:'text', cellAttributes: { alignment: 'center' },}
 ]
 export default class RecentPurchaseFlow extends LightningElement {
     @api prodName
@@ -19,25 +26,33 @@ export default class RecentPurchaseFlow extends LightningElement {
     }
     set docs(value){
         this.data = [...value]
+        //this.data = this.data.splice(0,5); 
     }
 connectedCallback(){
-    if(this.data.length> 0 || this.data === undefined){
-        this.found = true; 
-        this.sort(this.data)    
-    }
-    console.log('foudn '+this.found);
+    this.sort();
     
 }
-    sort(list){
-        //sort the data and only keep top 5 transactions
-        let sorted = list.sort((a, b)=> a.Doc_Date__c - b.Doc_Date__c);
-        sorted = sorted.splice(0,5)    
-    
+    sort(){
+        
+        if(this.data === undefined){
+            this.found = false
+        }else if(this.data.lenght <1){
+            this.found = false
+        }else{
+            this.found = false; 
+            this.data = this.data.splice(0,5);    
+        
 //here will manipulate the data to display to the user
-        // this.data = sorted.map(i=>{
-        //                 console.log(i.Qty) i.Doc_Date__c})
-        // console.log('docs ' +this.docs);
-        this.data = sorted; 
+        this.data = this.data.map(i=>{
+                         return {...i,
+                                nameURL: 'https://'+window.location.host+'/'+i.Id,
+                                margin: i.Margin__c + ' %'
+                        }
+        
+       })
+    }
+        
+        
          
     }
 }
