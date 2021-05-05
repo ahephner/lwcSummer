@@ -33,13 +33,14 @@ connectedCallback(){
     
 }
     sort(){
+        console.log('data '+this.data);
         
         if(this.data === undefined){
             this.found = false
         }else if(this.data.lenght <1){
             this.found = false
         }else{
-            this.found = false; 
+            this.found = true; 
             this.data = this.data.splice(0,5);    
         
 //here will manipulate the data to display to the user
