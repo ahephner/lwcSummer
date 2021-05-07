@@ -3,7 +3,18 @@
 public with sharing class Test_assetAdminController {
     @isTest
     static void getFiles(){
-          ATS_Asset__c Truck = new ATS_Asset__c(name = 'Truck', RecordTypeId='0122M000001cvDpQAI'); 
+        string rid = [select id from recordtype where description like 'Parent/Company Account'].id;
+        Account cust = new Account();
+        cust.name = 'Golf Course';
+        cust.RecordTypeId = rid;
+        cust.Customer_Name__c = '123-Golf Course';
+       insert cust; 
+       //location
+       Location__c location = new Location__c(Name = 'Test', Account__c=cust.id); 
+       insert location;
+        //asset
+          ATS_Asset__c Truck = new ATS_Asset__c(name = 'Truck', RecordTypeId='0122M000001cvDpQAI',
+                                               ATS_Location__c = location.id,Asset_Type__c= 'Pickup (PU)'); 
           insert Truck; 
           Admin_File__c File = new Admin_File__c(name = 'Truck File',ATS_Asset__c= Truck.id );
           insert File; 
@@ -53,10 +64,23 @@ public with sharing class Test_assetAdminController {
     );
         insert u; 
         system.runAs(u){
+        //account
+        string rid = [select id from recordtype where description like 'Parent/Company Account'].id;
+        Account cust = new Account();
+        cust.name = 'Golf Course';
+        cust.RecordTypeId = rid;
+        cust.Customer_Name__c = '123-Golf Course';
+       insert cust; 
+       //location
+       Location__c location = new Location__c(Name = 'Test', Account__c=cust.id); 
+       insert location; 
+            
         Sales_Rep__c sr = new Sales_Rep__c(Name='Rep', Sales_Rep_Num__c='12', ownerId = u.Id, Active__c = True);
     	insert sr;
         
-        ATS_Asset__c Truck = new ATS_Asset__c(name = 'Truck', RecordTypeId='0122M000001cvI6QAI',Asset_Type__c='Sales Rep Pickup (SRPU)', Sales_Rep__c = sr.Id); 
+        ATS_Asset__c Truck = new ATS_Asset__c(name = 'Truck', RecordTypeId='0122M000001cvI6QAI',
+                                              Asset_Type__c='Sales Rep Pickup (SRPU)', Sales_Rep__c = sr.Id,
+                                             ATS_Location__c = location.id ); 
           insert Truck; 
         //this is for the file test
         ContentVersion docFile = new ContentVersion(
