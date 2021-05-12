@@ -80,7 +80,7 @@ public with sharing class Test_assetAdminController {
         
         ATS_Asset__c Truck = new ATS_Asset__c(name = 'Truck', RecordTypeId='0122M000001cvI6QAI',
                                               Asset_Type__c='Sales Rep Pickup (SRPU)', Sales_Rep__c = sr.Id,
-                                             ATS_Location__c = location.id ); 
+                                             ATS_Location__c = location.id, sold__c = false ); 
           insert Truck; 
         //this is for the file test
         ContentVersion docFile = new ContentVersion(
