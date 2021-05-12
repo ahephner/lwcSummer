@@ -29,7 +29,7 @@ public with sharing class assetAdminController {
     public static list<ContentDocument> salesAssetFiles(string user){
         system.debug('userId '+user);
         List<string> fileIds = new List<String>();
-        id x = [select id from ats_asset__c where sales_rep__r.ownerid =: user].id;
+        id x = [select id from ats_asset__c where sales_rep__r.ownerid =: user and sold__c = false limit 1].id;
                 //link ids
         list<ContentDocumentLink> ids = [select ContentDocumentId from ContentDocumentLink 
                                         where LinkedEntityId = :x];
@@ -45,7 +45,7 @@ public with sharing class assetAdminController {
     }
     @AuraEnabled(cacheable=True)
     public static Ats_Asset__c getHeader(string user){
-        Ats_Asset__c x = [Select Id,Name, Asset_Type__c, License_Plate__c from ATS_Asset__c where sales_rep__r.ownerid =:user ];
+        Ats_Asset__c x = [Select Id,Name, Asset_Type__c, License_Plate__c from ATS_Asset__c where sales_rep__r.ownerid =:user and sold__c = false limit 1];
         return x; 
     }
 }
