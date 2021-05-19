@@ -1,5 +1,34 @@
 <template>
     <lightning-card  variant="Narrow"  title="Add Products">
-       <c-so-product-flow></c-so-product-flow>
+        <div class='slds-grid'>
+            <div class='slds-col slds-size-2-of-8 slds-m-left_x-small'>
+                <lightning-input
+                    name="enter-search"
+                    label="Search when user hits the 'enter' key"
+                    type="search"
+                    onchange={handleKeyUp}
+                ></lightning-input>
+            </div>
+            <div class='slds-col slds-size-2-of-8 slds-m-left_x-small'>
+                    <lightning-input
+                    name="desc"
+                    label="If product is not found Enter Description"
+                    type="search"
+                ></lightning-input>
+            </div>
+                <div class='slds-col slds-size-2-of-8 slds-m-left_x-small'>
+                    <lightning-input type="number" 
+                    name="input1" 
+                    label="QTY" 
+                    step='1'></lightning-input>
+            </div>
+                <div class='slds-col slds-size-2-of-8 slds-m-top_large'>
+                    <lightning-button variant="success" 
+                    label="Success" 
+                    title="Add Product" 
+                    onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+            </div>
+            </div>
+       <c-so-product-flow selection={prods}></c-so-product-flow>
     </lightning-card>
 </template>
