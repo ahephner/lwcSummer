@@ -5,7 +5,7 @@ public static List<Product__c> searchProd(String searchTerm){
     x = '%'+searchTerm+'%';
     List<Product__c> prods = [select id, name, product_name__c
                              from Product__c where name like:x OR product_name__c like:x];
-    System.debug(prods);
+    //System.debug(prods);
                              return prods; 
 }
 }

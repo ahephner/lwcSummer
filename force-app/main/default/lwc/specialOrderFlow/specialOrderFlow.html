@@ -4,23 +4,56 @@
             <div class='slds-col slds-size-2-of-8 slds-m-left_x-small'>
                 <lightning-input
                     name="enter-search"
-                    label="Search when user hits the 'enter' key"
+                    label="Search for product in system"
                     type="search"
                     onchange={handleKeyUp}
+                    value={productName}
                 ></lightning-input>
+                <template if:true={showResult}>
+                <div id='listbox'
+                     role='listbox'
+                     tabindex='0'
+                ><ul role='presentation' class={getListBoxClass}>
+                    <div if:true={loading}>
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </div>
+                   <template if:true={showResult} for:each={results} for:item="x" for:index="index">
+                       <li key={x.Id} data-recordid={x.Id} value={x.Product_Name__c} role='option' onclick={itemSelect}>
+                                  <span class="slds-media__body">
+                                    <span class="slds-listbox__option-text_entity">
+                                        <lightning-formatted-rich-text
+                                            value={x.Product_Name__c}
+                                        >
+                                        </lightning-formatted-rich-text>
+                                    </span>
+                                </span>
+                                <span class="slds-listbox__option-meta">
+                                    <lightning-formatted-rich-text
+                                          value={x.Name}
+                                    >
+                                    </lightning-formatted-rich-text>
+                                </span>
+                       </li>
+                    </template> 
+                </ul>
             </div>
+        </template> 
+            </div>   
             <div class='slds-col slds-size-2-of-8 slds-m-left_x-small'>
                     <lightning-input
                     name="desc"
                     label="If product is not found Enter Description"
-                    type="search"
+                    type="input"
+                    data-my-id="in3"
                 ></lightning-input>
             </div>
                 <div class='slds-col slds-size-2-of-8 slds-m-left_x-small'>
                     <lightning-input type="number" 
                     name="input1" 
                     label="QTY" 
-                    step='1'></lightning-input>
+                    required
+                    step='1'
+                    onchange={handleQty}></lightning-input>
             </div>
                 <div class='slds-col slds-size-2-of-8 slds-m-top_large'>
                     <lightning-button variant="success" 
@@ -28,7 +61,7 @@
                     title="Add Product" 
                     onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
             </div>
-            </div>
-       <c-so-product-flow selection={prods}></c-so-product-flow>
+    </div>   
+       <c-so-product-flow selection={selectedIds}></c-so-product-flow>
     </lightning-card>
 </template>
