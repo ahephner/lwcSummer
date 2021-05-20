@@ -1,8 +1,8 @@
 import { LightningElement, api, track } from 'lwc';
 const columns = [
     {label:'Product', fieldName:'name'},
-    {label:'Description', fieldName:'desc'},
-    {label:'QTY', fieldName:'qty'},
+    {label:'Description', fieldName:'Product_Description__c'},
+    {label:'QTY', fieldName:'Quantity_Requested__c'},
     {type: 'button', 
     initialWidth: 75,typeAttributes:{
        label: 'Remove',

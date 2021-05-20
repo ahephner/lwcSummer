@@ -58,12 +58,15 @@
             </div>
                 <div class='slds-col slds-size-2-of-8 slds-m-top_large'>
                     <lightning-button variant="success" 
-                    label="Success" 
+                    label="Add Line" 
                     title="Add Product" 
                     onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
             </div>
     </div>   
        <c-so-product-flow selection={selectedIds}
                           onupdate={handleRemove}></c-so-product-flow>
+        
+                <button type="button" onclick={goBack} class="slds-button slds-button_neutral">Cancel</button>
+                <button type="button" onclick={goNext} class="slds-button slds-button_brand">Next</button>
     </lightning-card>
 </template>

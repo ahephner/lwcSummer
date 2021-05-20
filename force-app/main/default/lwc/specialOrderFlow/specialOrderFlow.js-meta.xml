@@ -9,6 +9,7 @@
         <targetConfig targets='lightning__FlowScreen' category='sales'>
             <!--<property name="docs" type="@salesforce/schema/Sales_Doc_Detail__c[]" label='salesDoc'/>-->
             <property name="orderId" label='Order Id' type="String"/>
+            <property name='orderproducts' type="@salesforce/schema/Order_Request_Detail__c[]" label='OrderDetails'/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
