@@ -15,6 +15,7 @@ export default class SpecialOrderFlow extends LightningElement {
     loading = false; 
 //local vars
     minSearchTerm = 3; 
+    arrId = 0 
     queryTerm; 
     searchTimeOut; 
     productName; 
@@ -52,13 +53,8 @@ export default class SpecialOrderFlow extends LightningElement {
     itemSelect(evt){
         this.showResult = false;
         this.productName = evt.target.value;
-       // this will be used to pass the values back out to the flow. 
-        this.selectedIds = [
-            ...this.selectedIds, {
-                id: evt.currentTarget.dataset.recordid,
-                name: evt.target.value
-            }
-        ]
+        this.prodsId = evt.currentTarget.dataset.recordid
+
       
     }
     handleQty(e){
@@ -66,23 +62,52 @@ export default class SpecialOrderFlow extends LightningElement {
     }
     handleClick(){
        const desc = this.template.querySelector('lightning-input[data-my-id=in3]').value
-       console.log('desc '+desc);
-       console.log('productName '+this.productName);
-       console.log('qty '+this.qty);
+    //    console.log('desc '+desc);
+    //    console.log('productName '+this.productName);
+    //    console.log('qty '+this.qty);
        
        
-       
+       //no show toast in flows so throw a old fashion screen alert 
         if(this.qty ===undefined || this.qty <1){
             alert('Please make sure there is qty'); 
+            return; 
         } 
-        if(this.productName === undefined || this.productName.length<0 || desc === undefined || desc.length<5){
-            
-            
-            alert('Please make sure your are selecting a product')
-        }
+        // if((this.productName === undefined || this.productName.length<0) && (desc === undefined || desc.length<5)){
+        //     alert('Please make sure your are selecting a product');
+        //     return; 
+        // }
+               // this will be used to pass the values back out to the flow. 
+               this.arrId = this.arrId +1
+        this.selectedIds = [
+            ...this.selectedIds, {
+                id: this.arrId,
+                name: this.productName,
+                desc: desc,
+                qty: this.qty,
+                prodId: this.prodsId
+            }
+        ]
+        //desc field
+        this.template.querySelector('lightning-input[data-my-id=in3]').value = '';
+        this.productName = '';
+        this.qty = '';
+        this.prodsId = '';
+        //qty field
+        this.template.querySelector('lightning-input[data-my-id=in4]').value = '';
     }
 
-
+//remove product from id
+        handleRemove(x){
+            console.log('connected '+x.detail);
+            console.log('ARR ' +this.selectedIds);
+            
+             
+            const index = this.selectedIds.findIndex(item => item.id === x.detail);
+            console.log('index '+ index);
+            this.selectedIds.splice(index, 1);
+            //for some reason to pass to child this needs done
+            this.selectedIds = [...this.selectedIds];
+        }
     get getListBoxClass(){
         return 'slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid';
     }
