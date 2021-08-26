@@ -1,12 +1,12 @@
 <template>
-    <lightning-card  variant="Narrow"  title="Look Up Docs">
-        
+    <lightning-card  variant="Narrow">
         <lightning-input
             name="enter-search"
-            label="Search for product in system"
+            label="Search for SO"
             type="search"
             onchange={handleKeyUp}
             value={docName}
+            data-my-id="in4"
         ></lightning-input>
         <template if:true={showResult}>
             <div id='listbox'
@@ -37,5 +37,9 @@
             </ul>
         </div>
     </template>
+    <!--Need to make it so this does not show unless data-->
+        <c-select-reward-s-o selection={selectedSO}
+                             onremoveitem={removeSO}></c-select-reward-s-o>
+    
     </lightning-card>
 </template>

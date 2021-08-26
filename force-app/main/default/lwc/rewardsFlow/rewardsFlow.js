@@ -21,15 +21,15 @@ export default class RewardsFlow extends LightningElement{
                 this.results = result.data;
                 this.loading = false;
                 this.showResult = true;
-                console.log(this.results);  
+               // console.log(this.results);  
             }else if(result.error){
                 console.log(result.error); 
             }
         }
     handleKeyUp(keyWord){
-        console.log('length '+keyWord.target.value.length);
         
         if(this.minSearch > keyWord.target.value.length){
+            this.showResult = 'false'; 
             return; 
         }
         if(this.searchTimeOut){
@@ -47,23 +47,31 @@ export default class RewardsFlow extends LightningElement{
     }
 
     itemSelect(x){
-        console.log('show before '+this.showResult);
         const docId = x.currentTarget.dataset.recordid; 
         const dataName = x.currentTarget.dataset.name;
         
         
         this.selectedSO = [
             ...this.selectedSO, {
-                id: docId,
-                name: dataName
+                name: docId,
+                label: dataName
             }
         ]
         this.docName = ''; 
 //!when the input wont clear we could try grabbing the input and setting it to '' 
+        this.template.querySelector('lightning-input[data-my-id=in4]').value = '';
         // this.queryTerm = '';
         this.showResult = false; 
-        console.log('show after '+this.showResult);
         
+        
+    }
+//remove selected SO
+    removeSO(x){
+        let index = this.selectedSO.findIndex(item => item.name = x.detail)
+        console.log('index');
+        
+        this.selectedSO.splice(index, 1);
+        this.selectedSO = [...this.selectedSO]; 
     }
 //styling
     get getListBoxClass(){
