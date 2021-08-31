@@ -5,7 +5,6 @@
             label="Search for SO"
             type="search"
             onchange={handleKeyUp}
-            value={docName}
             data-my-id="in4"
         ></lightning-input>
         <template if:true={showResult}>
@@ -17,7 +16,7 @@
                     <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
                 </div>
                <template if:true={showResult} for:each={results} for:item="x" for:index="index">
-                   <li key={x.Id} data-recordid={x.Id} data-name={x.Name} value={x.Name} role='option' class='hover' onclick={itemSelect}>
+                   <li key={x.Id} data-recordid={x.Id} data-name={x.Name} data-value={x.Product_Sub_Total__c} value={x.Name} role='option' class='hover' onclick={itemSelect}>
                               <span class="slds-media__body">
                                 <span class="slds-listbox__option-text_entity">
                                     <lightning-formatted-rich-text
@@ -40,6 +39,14 @@
     <!--Need to make it so this does not show unless data-->
         <c-select-reward-s-o selection={selectedSO}
                              onremoveitem={removeSO}></c-select-reward-s-o>
-    
+                             <div class="slds-docked-form-footer">
+                                <!-- <lightning-button variant="destructive" label="Cancel" 
+                                                  title="Cancel" onclick={cancel} 
+                                                  class="slds-m-left_x-small"></lightning-button> -->
+                                <lightning-button variant="success" label="Next" 
+                                                  title="Successful action" onclick={goNext} 
+                                                  class="slds-m-left_x-small"></lightning-button>
+                                <!-- <button type="button" onclick={prodInfo} class="slds-button slds-button_brand">prod info</button> -->
+                            </div>
     </lightning-card>
 </template>

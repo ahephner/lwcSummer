@@ -2,14 +2,13 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>51.0</apiVersion>
     <isExposed>true</isExposed>
-    <targets>
+        <targets>
         <target>lightning__FlowScreen</target>
     </targets>
     <targetConfigs>
         <targetConfig targets='lightning__FlowScreen' category='sales'>
-            <property name='accountId' label='account id' type='String'/>
-            <property name='docName' label='Selected Docs' type='String'/>
-            <property name='docTotal' label='Doc Total' type='Integer'/>
+            <property name='recordId' label='id' type='string'/>
+            <!--<property name='type' label='list view or record' type='string'/>--> 
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
