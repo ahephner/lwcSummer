@@ -6,7 +6,7 @@ const REGEX_SOSL_RESERVED = /(\?|&|\||!|\{|\}|\[|\]|\(|\)|\^|~|\*|:|"|\+|\\)/g;
 export default class RewardsFlow extends LightningElement{
     @api accountId; 
     @api docTotal = 0;
-    @api docName;
+    @api docName = '';
     queryTerm;
     //MAKE THIS 5 BEFORE SENDING TO PROD!
     minSearch = 3;
@@ -85,15 +85,15 @@ export default class RewardsFlow extends LightningElement{
         console.log('docName first '+this.docName);
         
        this.selectedSO.forEach(x=>{ 
-                    this.docName += x.label+',';   
+                    this.docName += x.label+', ';   
                     this.docTotal += Number(x.total); 
        });
-       this.docName = this.docName;
+       //this.docName = this.docName;
        const attributeChange= new FlowAttributeChangeEvent('docName', this.docName);
        const attributeChange2 = new FlowAttributeChangeEvent('docTotal',this.docTotal)
        this.dispatchEvent(attributeChange);
        this.dispatchEvent(attributeChange2)
-       //this.handleNext();
+       this.handleNext();
     }
     handleNext(){
         const nextNav = new FlowNavigationNextEvent();
