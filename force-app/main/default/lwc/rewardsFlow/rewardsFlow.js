@@ -1,5 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import getDocs from '@salesforce/apex/rewardsController.getDocs';
+import getDocs from '@salesforce/apex/rewardsListView.getDocs';
 import { FlowNavigationNextEvent,FlowAttributeChangeEvent } from 'lightning/flowSupport';
 const SEARCH_DELAY = 500;
 const REGEX_SOSL_RESERVED = /(\?|&|\||!|\{|\}|\[|\]|\(|\)|\^|~|\*|:|"|\+|\\)/g;
