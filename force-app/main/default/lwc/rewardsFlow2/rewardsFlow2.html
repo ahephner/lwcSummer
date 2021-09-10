@@ -1,0 +1,18 @@
+<template>
+   <lightning-card>
+    <lightning-input type="date" name="input1" 
+    label="Start" onchange={handleStart}></lightning-input>
+    <lightning-input type="date" name="input1" 
+    label="End" onchange={handleEnd}></lightning-input>
+   </lightning-card> 
+   <lightning-button variant="base" label="Search" 
+   title="Search" onclick={getDocs}></lightning-button>
+   <hr/>
+   <template if:true={data}>
+   <lightning-datatable
+       key-field="id"
+       data={data}
+       columns={columns}>
+   </lightning-datatable>
+    </template>
+</template>
