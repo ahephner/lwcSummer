@@ -7,12 +7,20 @@
    </lightning-card> 
    <lightning-button variant="base" label="Search" 
    title="Search" onclick={getDocs}></lightning-button>
-   <hr/>
+   
    <template if:true={data}>
    <lightning-datatable
        key-field="id"
        data={data}
-       columns={columns}>
+       columns={columns}
+       draft-values={draftValues}>
    </lightning-datatable>
+   <hr/>
+   <div class="slds-m-top_small slds-m-bottom_medium slds-float_right">
+   <lightning-button variant="brand-outline" label="Back" 
+        title="back button" onclick={handleBack}></lightning-button>
+   <lightning-button variant="brand" label="Next" class="slds-m-left_x-small"
+        title="next button" onclick={handleClick}></lightning-button>
+    </div>
     </template>
 </template>
