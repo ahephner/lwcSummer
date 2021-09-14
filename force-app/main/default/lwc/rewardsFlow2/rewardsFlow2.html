@@ -9,12 +9,18 @@
    title="Search" onclick={getDocs}></lightning-button>
    
    <template if:true={data}>
-   <lightning-datatable
-       key-field="id"
-       data={data}
-       columns={columns}
-       draft-values={draftValues}>
-   </lightning-datatable>
+    <div style='height: 300px;'>
+    <lightning-datatable
+        key-field="id"
+        data={data}
+        columns={columns}
+        default-sort-direction={defaultSortDirection}
+        sorted-direction={sortDirection}
+        sorted-by={sortedBy}
+        onsort={onHandleSort}
+        draft-values={draftValues}>
+    </lightning-datatable>
+    </div>
    <hr/>
    <div class="slds-m-top_small slds-m-bottom_medium slds-float_right">
    <lightning-button variant="brand-outline" label="Back" 

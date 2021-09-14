@@ -2,12 +2,19 @@ import { LightningElement,api } from 'lwc';
 import { FlowNavigationNextEvent,FlowNavigationBackEvent , FlowAttributeChangeEvent } from 'lightning/flowSupport';
 import getDocTable from '@salesforce/apex/rewardsListView.getDocTable';
 
+// const columns = [
+//     {label:'Sales Order', fieldName:'Name', initialWidth:120},
+//     {label:'Doc Date', fieldName:'Doc_Date__c', initialWidth:120},
+//     {label:'Product Amount', fieldName:'Product_Sub_Total__c', initialWidth:120}, 
+//     {label:'PO', fieldName:'Cust_PO_Num__c', initialWidth:150}
+// ]
+
 const columns = [
-    {label:'Sales Order', fieldName:'Name', initialWidth:120},
-    {label:'Doc Date', fieldName:'Doc_Date__c', initialWidth:120},
-    {label:'Product Amount', fieldName:'Product_Sub_Total__c', initialWidth:120}, 
-    {label:'PO', fieldName:'Cust_PO_Num__c', initialWidth:150}
-]
+        {label:'Sales Order', fieldName:'Name'},
+        {label:'Doc Date', fieldName:'Doc_Date__c', sortable: true,},
+        {label:'Product Amount', fieldName:'Product_Sub_Total__c'}, 
+        {label:'PO', fieldName:'Cust_PO_Num__c'}
+    ]
 export default class RewardsFlow2 extends LightningElement {
     @api accountId; 
     @api docTotal = 0;
@@ -17,6 +24,9 @@ export default class RewardsFlow2 extends LightningElement {
     data;
     error;
     columns = columns; 
+    defaultSortDirection = 'asc';
+    sortDirection = 'asc';
+    sortedBy;
 
     handleStart(e){
         this.startDate = e.target.value.slice(0,10);
@@ -63,7 +73,32 @@ export default class RewardsFlow2 extends LightningElement {
         console.log(this.error);
     })
  }
+ sortBy(field, reverse, primer) {
+    const key = primer
+        ? function (x) {
+              return primer(x[field]);
+          }
+        : function (x) {
+              return x[field];
+          };
 
+    return function (a, b) {
+        a = key(a);
+        b = key(b);
+        return reverse * ((a > b) - (b > a));
+    };
+}
+
+//sorting functions
+onHandleSort(event) {
+    const { fieldName: sortedBy, sortDirection } = event.detail;
+    const cloneData = [...this.data];
+
+    cloneData.sort(this.sortBy(sortedBy, sortDirection === 'asc' ? 1 : -1));
+    this.data = cloneData;
+    this.sortDirection = sortDirection;
+    this.sortedBy = sortedBy;
+}
  //need a selection function
  //need a deselection function
  //need next flow event
