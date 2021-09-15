@@ -9,10 +9,11 @@
    title="Search" onclick={getDocs}></lightning-button>
    
    <template if:true={data}>
-    <div style='height: 300px;'>
+    <div style='height: 250px;'>
     <lightning-datatable
         key-field="id"
         data={data}
+        class='slds-max-medium-table_stacked-horizontal'
         columns={columns}
         default-sort-direction={defaultSortDirection}
         sorted-direction={sortDirection}

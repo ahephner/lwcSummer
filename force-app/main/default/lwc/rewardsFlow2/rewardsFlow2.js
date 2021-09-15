@@ -24,8 +24,8 @@ export default class RewardsFlow2 extends LightningElement {
     data;
     error;
     columns = columns; 
-    defaultSortDirection = 'asc';
-    sortDirection = 'asc';
+    defaultSortDirection = 'desc';
+    sortDirection = 'desc';
     sortedBy;
 
     handleStart(e){
@@ -94,12 +94,10 @@ onHandleSort(event) {
     const { fieldName: sortedBy, sortDirection } = event.detail;
     const cloneData = [...this.data];
 
-    cloneData.sort(this.sortBy(sortedBy, sortDirection === 'asc' ? 1 : -1));
+    cloneData.sort(this.sortBy(sortedBy, sortDirection === 'desc' ? 1 : -1));
     this.data = cloneData;
     this.sortDirection = sortDirection;
     this.sortedBy = sortedBy;
 }
- //need a selection function
- //need a deselection function
- //need next flow event
+
 }
