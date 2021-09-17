@@ -1,6 +1,6 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getDocs from '@salesforce/apex/rewardsListView.getDocs';
-import { FlowNavigationNextEvent,FlowAttributeChangeEvent, FlowNavigationBackEvent } from 'lightning/flowSupport';
+import { FlowNavigationNextEvent,FlowAttributeChangeEvent, FlowNavigationBackEvent  } from 'lightning/flowSupport';
 const SEARCH_DELAY = 500;
 const REGEX_SOSL_RESERVED = /(\?|&|\||!|\{|\}|\[|\]|\(|\)|\^|~|\*|:|"|\+|\\)/g;
 export default class RewardsFlow extends LightningElement{
@@ -100,10 +100,8 @@ export default class RewardsFlow extends LightningElement{
         this.dispatchEvent(nextNav);
     }
     handleBack(){
-        console.log('back');
-        
-        const backNav = new FlowNavigationBackEvent();
-        this.dispatchEvent(backNav);
+        const goback = new FlowNavigationBackEvent();
+        this.dispatchEvent(goback);
     }
 //styling
     get getListBoxClass(){

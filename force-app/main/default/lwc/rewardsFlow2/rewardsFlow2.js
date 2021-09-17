@@ -63,6 +63,10 @@ export default class RewardsFlow2 extends LightningElement {
         this.dispatchEvent(backNav);
     }
     getDocs(){
+        if(this.startDate === undefined|| this.endDate === undefined){
+            alert('Please select 2 dates');
+            return; 
+        }
         getDocTable({accountId:this.accountId, fDate:this.startDate, sDate:this.endDate})
             .then(res=>{
             this.data = res
