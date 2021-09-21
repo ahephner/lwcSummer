@@ -96,5 +96,39 @@ public class test_rewardsListView {
         system.assertEquals(2, li.size()); 
             
     }
+        private static testmethod void openOrder(){
+                Account cust = new Account();
+        cust.Name = 'Test123456';
+        cust.RecordTypeId = '01241000001Dy64AAC';
+        cust.Customer_Name__c = 'Test Customer 123456';
+        	insert cust;
+    	//Sales Rep
+    	Sales_Rep__c sr = new Sales_Rep__c(Name='Rep', Sales_Rep_Num__c='12');
+    	insert sr; 
+
+        //date and pricebook don't know if you need it just incase 
+        Date myDate = Date.newInstance(2040, 1, 4);
+
+        //sales doc
+        Open_Order__c docOne = new Open_Order__c(name = 'SO123', customer__c = cust.id, 
+                                                       Open_Doc__c = 'SO123',Sales_Rep__c= sr.Id,
+                                                       Doc_Date__c = myDate, Cust_PO__c = 'SEE SPLIT TERMS' );
+        
+        Open_Order__c docTwo = new Open_Order__c(name = 'SO321', customer__c = cust.id, 
+                                                       Open_Doc__c = 'SO321',Sales_Rep__c= sr.Id,
+                                                       Doc_Date__c = myDate, Cust_PO__c = 'SEE SPLIT TERMS' );
+        insert docOne;
+        insert docTwo;
+        
+        Test.startTest();
+        String accountId = cust.Id;
+        string fDate = '2039-12-31';
+        string sDate = '2040-01-06';
+        	List<Open_Order__c> li = rewardsListView.getOpen(accountId,fDate, sDate );
+        Test.stopTest(); 
+        
+        system.assertEquals(2, li.size()); 
+            
+    }
     
 }

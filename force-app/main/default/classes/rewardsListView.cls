@@ -42,13 +42,24 @@ public List<Sales_Document__c> LstSelectedDocs {
     
     @AuraEnabled(cacheable=true)
     public static list<Sales_Document__c> getDocTable(string accountId, string fDate, string sDate){
-        system.debug('sDate '+sDate);
+        //system.debug('sDate '+sDate);
         Date startDate = date.valueOf(fDate); 
         date endDate = date.valueOf(sDate); 
-      system.debug('dates f '+fDate+' s '+sDate);
+      //system.debug('dates f '+fDate+' s '+sDate);
         List<Sales_Document__c> docList = [select id, name, Product_Sub_Total__c, Cust_PO_Num__c, doc_date__c from sales_document__c
                                           where customer__c =:accountId and Doc_Type__c = 'Invoice'
                                           and doc_date__c >= :startDate and doc_date__c <= :endDate];
         return docList; 
+    }
+    @AuraEnabled(cacheable=true)
+    public static list<Open_Order__c> getOpen(string accountId, string fDate, string sDate){
+        Date startDate = date.valueOf(fDate);
+        Date endDate = date.valueOf(sDate);
+        
+        list<Open_Order__c> orders = [select id, Name, Product_Only__c,doc_date__c, Cust_PO__c
+                                      from Open_Order__c where customer__c =:accountId
+                                      and doc_date__c >= :startDate and doc_date__c <= :endDate];
+        
+        return orders;
     }
 }
