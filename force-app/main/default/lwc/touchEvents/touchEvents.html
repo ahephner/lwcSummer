@@ -1,0 +1,20 @@
+<template>
+        <lightning-layout multiple-rows="true">
+            
+        <template for:each={data} for:item='x'>
+            <div class="c-container" key={x.id} >
+                <div class="header-column" data-row={x.id} onclick={mouseDown}>
+            <lightning-layout-item padding="around-small" data-row={x.name} size="12" class='pcCard'>
+                        <template if:false={x.showInfo}>
+                        
+                        <h1 id={x.id} data-id={x.id}>{x.name}</h1>
+                    </template>
+                    <template if:true={x.showInfo}>
+                        <p>{x.altName}</p>
+                    </template>
+                </lightning-layout-item>
+            </div>
+            </div>
+        </template>
+            </lightning-layout>
+</template>
