@@ -1,0 +1,10 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Passer" icon-name="standard:account">
+        <div class="container slds-m-left_medium">
+            <lightning-input type="number" variant="standard" 
+                             name="name" label="Number to Pass" 
+                             value={passNumb} onchange={handleNumber}></lightning-input>
+            <lightning-button-icon  icon-name="utility:up" variant="border-filled" alternative-text="Show More" onclick={addOne}></lightning-button-icon>
+        </div>
+    </lightning-card>
+</template>

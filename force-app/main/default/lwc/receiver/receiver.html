@@ -1,0 +1,17 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Receiver" icon-name="standard:account">
+        <template if:true={goodNumber}>
+            <div class="container slds-m-left_medium">
+                <h3>Count</h3>
+                <p>{count}</p>
+            </div>            
+        </template>
+        <template if:false={goodNumber}>
+            <div class="container slds-m-left_medium">
+                <p>Your number is too low. Would you like me to update it for you?</p>
+                <lightning-button variant="base" label="Update" title="Update" onclick={handleUpdate}></lightning-button>
+            </div>
+        </template>
+
+    </lightning-card>
+</template>

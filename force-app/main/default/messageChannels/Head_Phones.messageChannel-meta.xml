@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightingMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Head_Phones</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message Channel to pass App updates</description>
+    <lightningMessageFields>
+        <fieldName>number</fieldName>
+        <description>Pass number to other commponents</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>update</fieldName>
+        <description>what update to run</description>
+    </lightningMessageFields>
+</LightingMessageChannel>

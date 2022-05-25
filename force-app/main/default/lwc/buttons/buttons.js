@@ -34,6 +34,7 @@ export default class Buttons extends LightningElement {
     }
     termChange(event){
         this.term = event.detail.value; 
+        console.log(this.term)
     }
 
 }
