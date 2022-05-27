@@ -1,0 +1,17 @@
+<template>
+    <div class={flexipageRegionWidth}>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="small" variant='brand'></lightning-spinner>
+        </template>
+        <template if:false={isLoading}>
+            <lightning-datatable
+                key-field='Id'
+                data={items}
+                columns={columns}
+                draft-values={draftValues}
+                hide-checkbox-column>
+
+            </lightning-datatable>
+        </template>
+    </div>
+</template>
