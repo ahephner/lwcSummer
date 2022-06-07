@@ -18,7 +18,7 @@ export default class ReturnRequestTable extends LightningElement {
     columns = columns; 
     @track items; 
     requestItems
-
+    isReturnRequest
 
     @wire(getDetails, {recordId: '$recordId'})
     wiredResult(result){
@@ -29,6 +29,7 @@ export default class ReturnRequestTable extends LightningElement {
             urlName = `/${row.Id}`;
             return {...row, urlName}   
         })
+        this.isReturnRequest = this.items.length > 1 ? true : false 
         this.isLoading = false; 
     }else if(result.error){
         console.log(result.error)
