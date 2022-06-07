@@ -19,7 +19,8 @@ export default class FlowEquipExpense extends LightningElement {
     @api defCost
     
     connectedCallback(){
-        console.log(this.maint + ' maint')
+        console.log(this.maint + ' maint');
+        console.log('record id '+this.recordId)
     }
     //next page
     handleNext(){
