@@ -1,0 +1,9 @@
+.card{
+    border: rgb(39, 38, 38) solid 1px;
+    margin-top: .25%;
+    cursor: pointer;
+    padding: .5%;
+}
+.point{
+    cursor: pointer;
+}
