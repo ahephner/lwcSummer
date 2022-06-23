@@ -1,6 +1,6 @@
-//name, product name, product code, original order, returned amount
+//For process instance return requests. 
 import { LightningElement, api, track, wire } from 'lwc';
-import getDetails from  '@salesforce/apex/getReturnDetails.getDets';
+import getDetails from  '@salesforce/apex/getReturnDetails.PIgetDetails';
 
 const columns = [
     {label:'Return Request Detail Name', 'fieldName':'urlName', type:'url', typeAttributes:{label:{fieldName:'Name'}},target:'_blank' },
@@ -11,7 +11,7 @@ const columns = [
     
 ]
 
-export default class ReturnRequestTable extends LightningElement {
+export default class PiReturnRequestTable extends LightningElement{
     @api recordId;
     isLoading = true;
     @api prop1; 
@@ -36,5 +36,4 @@ export default class ReturnRequestTable extends LightningElement {
         console.log(result.error)
     }
     }
-
 }
