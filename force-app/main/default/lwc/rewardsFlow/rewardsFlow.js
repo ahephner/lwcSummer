@@ -41,8 +41,7 @@ export default class RewardsFlow extends LightningElement{
              this.loading = true;
              this.queryTerm = key; 
              this.searchTimeOut = null; 
-             console.log('query '+this.queryTerm);
-             console.log('accountID '+ this.accountId);
+
              
          }, SEARCH_DELAY); 
     }

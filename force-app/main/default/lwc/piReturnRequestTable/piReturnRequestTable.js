@@ -1,6 +1,6 @@
 //For process instance return requests. 
 import { LightningElement, api, track, wire } from 'lwc';
-import getDetails from  '@salesforce/apex/getReturnDetails.PIgetDetails';
+import getDetails from  '@salesforce/apex/lookUpFlow.PIgetDetails';
 
 const columns = [
     {label:'Return Request Detail Name', 'fieldName':'urlName', type:'url', typeAttributes:{label:{fieldName:'Name'}},target:'_blank' },
