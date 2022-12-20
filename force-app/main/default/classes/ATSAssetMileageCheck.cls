@@ -6,8 +6,7 @@ public class ATSAssetMileageCheck {
         
         List<ats_asset__c> assetCall = [select id, sales_rep__c from ats_asset__c 
                                         where Last_Mileage_Entry_Date__c <=:lateDate and Asset_Type__c = 'Sales Rep Pickup (SRPU)'
-                                       and sold__c = false and sales_rep__r.active__c = true and (NOT sales_rep__r.name Like '%(FM)%')
-                                       and (NOT sales_rep__r.name Like '(RM)%')];
+                                       and sold__c = false and (NOT sales_rep__r.name Like '%(FM)%') and sales_rep__c != null];
         system.debug('assetCall Size '+assetCall.size());
         if(assetCall.size() > 0){
             for(ats_asset__c x: assetCall){
