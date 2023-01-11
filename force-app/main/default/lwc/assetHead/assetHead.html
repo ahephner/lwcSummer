@@ -10,5 +10,23 @@
 				<p class='slds-size_1-of-2'>{license}</p>
 			</div>
 		</div>
+		<div class="slds-text-heading_small slds-m-left_small slds-m-top_small">
+			Mileage Info:
+			<lightning-helptext content={helpText}></lightning-helptext>
+		</div>
+		<div class='slds-grid slds-m-top_x-small'>
+			<div class='slds-col slds-m-left_small'>
+				<p class='slds-size_1-of-1'>Work Miles:</p>
+				<p class='slds-size_1-of-1'>
+					<lightning-formatted-number value={workMiles} maximum-fraction-digits="2"></lightning-formatted-number> mi.
+				</p>
+			</div>
+			<div class='slds-col'>
+				<p class='slds-size_1-of-1'>Personal Miles:</p>
+				<p class='slds-size_1-of-1'>
+					<lightning-formatted-number value={personalMiles} maximum-fraction-digits="2"></lightning-formatted-number> mi.
+				</p>
+			</div>
+		</div>
 	</lightning-card>
 </template>
