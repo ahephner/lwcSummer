@@ -45,8 +45,9 @@ public with sharing class assetAdminController {
     }
     @AuraEnabled(cacheable=True)
     public static Ats_Asset__c getHeader(string user){
-        Ats_Asset__c x = [Select Id,Name, Asset_Type__c, License_Plate__c from ATS_Asset__c where sales_rep__r.ownerid =:user and sold__c = false
-                          and Asset_Type__c = 'Sales Rep Pickup (SRPU)' limit 1];
-        return x; 
+        Ats_Asset__c x = [Select Id,Name, Asset_Type__c, License_Plate__c, Total_Work_Miles__c, Total_Personal_Miles__c 
+                          from ATS_Asset__c where sales_rep__r.ownerid =:user and sold__c = false
+                          and (Asset_Type__c = 'Sales Rep Pickup (SRPU)' or Asset_Type__c = 'Pickup (PU)') limit 1];
+        return x;
     }
 }
